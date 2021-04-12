@@ -1,0 +1,54 @@
+h2.test-text{
+	font-size: 40px;
+	text-align: center;
+}
+.test-widget-wrapper {
+	overflow: hidden;
+	position: relative;
+	padding: 20px 0;
+	border: 1px solid #d2d2d2;
+	border-radius: 5px;
+}
+
+.test-widget-wrapper ul.test-widget-container {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	list-style: none;
+}
+
+.test-widget-wrapper span.test-widget-sticky-title {
+	position: absolute;
+	background: #333333;
+	color: #ffffff;
+	font-size: 1rem;
+	line-height: 1;
+	padding: 20px;
+	top: 50%;
+	left: auto;
+	transform: translateY(-50%);
+	z-index: 1;
+}
+
+.test-widget-wrapper li.test-widget-item {
+	margin-right: 20px;
+	white-space: nowrap;
+}
+
+.test-widget-wrapper li.test-widget-item:last-child {
+	margin-right: 0;
+}
+
+.test-widget-wrapper .test-widget-title {
+	margin: 0;
+	font-size: 1rem;
+	line-height: 1;
+}
+
+.test-widget-wrapper li.test-widget-item a {
+	color: #242424;
+}
+
+.test-widget-wrapper li.test-widget-item a:hover {
+	color: #E04C8A;
+}
