@@ -16,7 +16,7 @@ class Faq extends Base {
      *
      */
     public function get_title() {
-        return __( 'Faq', 'plugin-name' );
+        return __( 'Faq', 'booth-elementor' );
     }
 
 	public function get_keywords() {
