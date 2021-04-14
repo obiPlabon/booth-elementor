@@ -19,3 +19,16 @@ if (!function_exists('litipay_get_wysiwyg_output')) {
 function booth_elementor() {
 	return \Elementor\Plugin::instance();
 }
+/**
+ * Check Booth theme is active or not
+ */
+if(! function_exists('is_booth_active') ) {
+	function is_booth_active(){
+		$theme = wp_get_theme(); // gets the current theme
+		if ( 'Booth' == $theme->name || 'Booth' == $theme->parent_theme ) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+}

@@ -367,7 +367,7 @@ class Control_Ui  {
             'range' => $range,
             'default' => $default,
         ], $extra);
-        $this->add_control_args($id, $arguments, true);
+        $this->add_control_args($id, $arguments, false);
     }
 
 
