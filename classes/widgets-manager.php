@@ -21,6 +21,7 @@ class Widgets_Manager {
 		$map = [
 			'test-addon',
 			'faq',
+			'countdown',
         ];
 
 		return apply_filters( 'booth_elementor__widget_map', $map );

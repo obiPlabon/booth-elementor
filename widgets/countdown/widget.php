@@ -2,7 +2,7 @@
 namespace Booth_Elementor\Widget;
 
 
-class Faq extends Base {
+class Countdown extends Base {
 
 	protected static $widget;
 
@@ -16,16 +16,14 @@ class Faq extends Base {
      *
      */
     public function get_title() {
-        return __( 'Faq', 'plugin-name' );
+        return __( 'Countdown', 'plugin-name' );
     }
 
 	public function get_keywords() {
 		return ['test'];
 	}
 
-	public function get_script_depends() {
-		return [ 'jquery-ui-accordion' ];
-	}
+
 
     protected function register_content_controls() {
 
