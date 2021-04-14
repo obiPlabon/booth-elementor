@@ -8,7 +8,12 @@ defined( 'ABSPATH' ) || die();
 
 abstract class Base extends Widget_Base {
 
-	use Control_Ui;
+	// protected static $widget;
+
+	// public function __construct($data = array(), $args = null) {
+	// 	parent::__construct($data, $args);
+	// 	self::$widget = new Control_Ui($this);
+	// }
 
 	public function get_name() {
         /**
@@ -95,5 +100,20 @@ abstract class Base extends Widget_Base {
      * @return void
      */
     abstract protected function register_style_controls();
+
+	protected function parse_text_editor( $content ) {
+		/** This filter is documented in wp-includes/widgets/class-wp-widget-text.php */
+		$content = apply_filters( 'widget_text', $content, $this->get_settings() );
+
+		$content = shortcode_unautop( $content );
+		$content = do_shortcode( $content );
+		$content = wptexturize( $content );
+
+		if ( $GLOBALS['wp_embed'] instanceof \WP_Embed ) {
+			$content = $GLOBALS['wp_embed']->autoembed( $content );
+		}
+
+		return $content;
+	}
 
 }

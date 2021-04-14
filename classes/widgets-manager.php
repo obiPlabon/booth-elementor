@@ -20,6 +20,7 @@ class Widgets_Manager {
 
 		$map = [
 			'test-addon',
+			'faq',
         ];
 
 		return apply_filters( 'booth_elementor__widget_map', $map );

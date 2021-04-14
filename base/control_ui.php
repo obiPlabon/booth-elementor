@@ -2,6 +2,7 @@
 
 namespace Booth_Elementor\Widget;
 
+use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Repeater;
@@ -13,7 +14,13 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 
-trait Control_Ui {
+class Control_Ui  {
+
+	private $widget;
+
+    public function __construct($widget) {
+        $this->widget = $widget;
+    }
 
 	/**
 	 * extend extra control option
@@ -36,12 +43,12 @@ trait Control_Ui {
 	 */
     private function add_control_args( $id = '', $arguments = [], $responsive = false ) {
         if ($responsive) {
-            $this->add_responsive_control(
+            $this->widget->add_responsive_control(
                 $id,
                 $arguments
             );
         } else {
-            $this->add_control(
+            $this->widget->add_control(
                 $id,
                 $arguments
             );
@@ -56,7 +63,7 @@ trait Control_Ui {
 	 * @return void
 	 */
     private function add_group_control_args( $type, $arguments ) {
-        $this->add_group_control(
+        $this->widget->add_group_control(
             $type,
             $arguments
         );
@@ -75,7 +82,7 @@ trait Control_Ui {
 			'content' => Controls_Manager::TAB_CONTENT,
 			'style' => Controls_Manager::TAB_STYLE,
 		];
-        $this->start_controls_section(
+        $this->widget->start_controls_section(
             $id,
             [
                 'label' => $label,
@@ -87,7 +94,7 @@ trait Control_Ui {
 
 
     public function __end() {
-        return $this->end_controls_section();
+        return $this->widget->end_controls_section();
     }
 
     /* Controls */
@@ -195,7 +202,7 @@ trait Control_Ui {
 		$this->add_control_args($id, $arguments);
 	}
 
-    public function switcher_control($id, $label, $default = 'yes', $label_on = '', $label_off = '', $return_value = 'yes', $extra = []) {
+    public function switcher_control($id, $label, $default = 'yes', $return_value = 'yes', $label_on = '', $label_off = '', $extra = []) {
         $arguments = $this->extend_arguments([
             'label'        => $label,
             'type'         => Controls_Manager::SWITCHER,
@@ -335,7 +342,8 @@ trait Control_Ui {
             'show_label' => false,
             'type' => Controls_Manager::REPEATER,
             'fields' => $repeater->get_controls(),
-            'title_field' => '<# print(title || "EasyGrid Item"); #>',
+            'title_field' => $title ? '{{{ '.$title.' }}}' : '',
+            // 'title_field' => '<# print(title || "Item"); #>',
         ], $extra);
         $this->add_control_args($id, $arguments);
     }
@@ -373,5 +381,16 @@ trait Control_Ui {
         $this->add_group_control_args(Group_Control_Typography::get_type(), $arguments);
     }
     /* End Controls */
+
+	/** Repater  **/
+    public function create_repeater() {
+        $repeater = new Repeater();
+        return new self($repeater);
+    }
+
+    public function get_controls() {
+        return $this->widget->get_controls();
+    }
+    /** End Repater  **/
 
 }
