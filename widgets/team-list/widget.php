@@ -15,9 +15,6 @@ class Team_List extends Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
         self::$widget = new Control_Ui( $this );
-
-        // add_action( 'elementor/frontend/before_enqueue_scripts', [ $this, 'scripts_enqueue' ] );
-        // add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'scripts_enqueue' ] );
     }
 
     /**
@@ -30,119 +27,6 @@ class Team_List extends Base {
 
     public function get_keywords() {
         return ['booth', 'team-list'];
-    }
-
-    public function scripts_register() {
-        wp_register_script( 'booth-jquery-plugin', BOOTH_ELEMENTOR_ASSETS . '/vendor/js/jquery.plugin.js', [ 'jquery', 'booth-select-modules' ], false, true );
-        wp_register_script( 'booth-countdown', BOOTH_ELEMENTOR_ASSETS . '/vendor/js/jquery.countdown.min.js', [ 'jquery', 'booth-select-modules' ], false, true );
-    }
-
-    public function scripts_enqueue() {
-        wp_enqueue_script( 'booth-jquery-plugin', BOOTH_ELEMENTOR_ASSETS . '/vendor/js/jquery.plugin.js', [ 'jquery', 'booth-select-modules' ], false, true );
-        wp_enqueue_script( 'booth-countdown', BOOTH_ELEMENTOR_ASSETS . '/vendor/js/jquery.countdown.min.js', [ 'jquery', 'booth-select-modules' ], false, true );
-    }
-
-    public function get_script_depends() {
-
-        $this->scripts_register();
-
-        return [
-            'booth-jquery-plugin',
-            'booth-countdown',
-        ];
-    }
-
-    public function get_year() {
-        return [
-            '2018' => '2018',
-            '2019' => '2019',
-            '2020' => '2020',
-            '2021' => '2021',
-            '2022' => '2022',
-        ];
-    }
-
-    public function get_month() {
-        return [
-            '1'  => esc_html__( 'January', 'booth-elementor' ),
-            '2'  => esc_html__( 'February', 'booth-elementor' ),
-            '3'  => esc_html__( 'March', 'booth-elementor' ),
-            '4'  => esc_html__( 'April', 'booth-elementor' ),
-            '5'  => esc_html__( 'May', 'booth-elementor' ),
-            '6'  => esc_html__( 'June', 'booth-elementor' ),
-            '7'  => esc_html__( 'July', 'booth-elementor' ),
-            '8'  => esc_html__( 'August', 'booth-elementor' ),
-            '9'  => esc_html__( 'September', 'booth-elementor' ),
-            '10' => esc_html__( 'October', 'booth-elementor' ),
-            '11' => esc_html__( 'November', 'booth-elementor' ),
-            '12' => esc_html__( 'December', 'booth-elementor' ),
-        ];
-    }
-
-    public function get_day() {
-        return [
-            '1'  => '1',
-            '2'  => '2',
-            '3'  => '3',
-            '4'  => '4',
-            '5'  => '5',
-            '6'  => '6',
-            '7'  => '7',
-            '8'  => '8',
-            '9'  => '9',
-            '10' => '10',
-            '11' => '11',
-            '12' => '12',
-            '13' => '13',
-            '14' => '14',
-            '15' => '15',
-            '16' => '16',
-            '17' => '17',
-            '18' => '18',
-            '19' => '19',
-            '20' => '20',
-            '21' => '21',
-            '22' => '22',
-            '23' => '23',
-            '24' => '24',
-            '25' => '25',
-            '26' => '26',
-            '27' => '27',
-            '28' => '28',
-            '29' => '29',
-            '30' => '30',
-            '31' => '31',
-        ];
-    }
-
-    public function get_hour() {
-        return [
-            '0'  => '0',
-            '1'  => '1',
-            '2'  => '2',
-            '3'  => '3',
-            '4'  => '4',
-            '5'  => '5',
-            '6'  => '6',
-            '7'  => '7',
-            '8'  => '8',
-            '9'  => '9',
-            '10' => '10',
-            '11' => '11',
-            '12' => '12',
-            '13' => '13',
-            '14' => '14',
-            '15' => '15',
-            '16' => '16',
-            '17' => '17',
-            '18' => '18',
-            '19' => '19',
-            '20' => '20',
-            '21' => '21',
-            '22' => '22',
-            '23' => '23',
-            '24' => '24',
-        ];
     }
 
     /**
@@ -252,52 +136,12 @@ class Team_List extends Base {
         self::$widget->select_control( 'order', __( 'Order', 'booth-elementor' ), 'ASC', booth_select_get_query_order_array() );
 
         self::$widget->color_control( 'team_member_name_color', __( 'Team Member Name Color', 'booth-elementor' ), '', [],
-            // [
-            //     '{{WRAPPER}} .somethisn' => 'color: {{VALUE}}',
-            // ],
             [
                 'condition' => [
                     'team_member_layout' => 'info-bellow',
                 ],
             ]
         );
-
-        /* self::$widget->select_control( 'skin', __( 'Skin','booth-elementor'), '',
-        [
-        ''=> __( 'Default', 'booth-elementor' ),
-        'qodef-light-skin'=> __( 'Light', 'booth-elementor' ),
-        ]
-        );
-        self::$widget->select_control( 'month', __( 'Month','booth-elementor'), '',$this->get_month());
-
-        self::$widget->select_control( 'day', __( 'Day','booth-elementor'), '',$this->get_day());
-        self::$widget->select_control( 'hour', __( 'Hour','booth-elementor'), '',$this->get_hour());
-        self::$widget->select_control( 'minute', __( 'Minute','booth-elementor'), '',$this->get_minute());
-
-        self::$widget->text_control('day_label',__('Day Label','booth-elementor'),__('Days','booth-elementor'));
-        self::$widget->text_control('hour_label',__('Hours Label','booth-elementor'),__('Hours','booth-elementor'));
-        self::$widget->text_control('minute_label',__('Minutes Label','booth-elementor'),__('Minutes','booth-elementor'));
-        self::$widget->text_control('second_label',__('Seconds Label','booth-elementor'),__('Seconds','booth-elementor'));
-
-        self::$widget->number_control('digit_font_size',__('Digit Font Size (px)','booth-elementor'),'','','0','1000','1');
-        self::$widget->number_control('label_font_size',__('Label Font Size(px)','booth-elementor'),'','','0','1000','1'); */
-
-        // $range = [
-        //     'px' => [
-        //         'min' => 0,
-        //         'max' => 1000,
-        //         'step' => 1,
-        //     ],
-        // ];
-        // self::$widget->slider_control('digit_font_size',__('Digit Font Size','booth-elementor'),[ 'px'],$range);
-        // self::$widget->slider_control('label_font_size',__('Label Font Size','booth-elementor'),[ 'px'],$range);
-
-        /* self::$widget->text_control('custom_class',__('Custom CSS Class','booth-elementor'),'','',false,
-        [
-        'label_block'=>true,
-        'description'=>__('Style particular content element differently - add a class name and refer to it in custom CSS','booth-elementor')
-        ]
-        ); */
 
         self::$widget->__end();
 
