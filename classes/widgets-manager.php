@@ -24,6 +24,7 @@ class Widgets_Manager {
 			'countdown',
 			'team-list',
 			'testimonials',
+			'event-list',
         ];
 
 		return apply_filters( 'booth_elementor__widget_map', $map );
