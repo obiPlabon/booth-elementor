@@ -22,6 +22,7 @@ class Widgets_Manager {
 			'test-addon',
 			'faq',
 			'countdown',
+			'team-list',
         ];
 
 		return apply_filters( 'booth_elementor__widget_map', $map );

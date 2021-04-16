@@ -262,9 +262,7 @@ class Countdown extends Base {
 
 	protected function render() {
 		// return;
-		if( !is_booth_active() ){
-			return;
-		}
+		
 		$settings = $this->get_settings_for_display();
 
 
