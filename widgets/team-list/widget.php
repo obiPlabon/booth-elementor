@@ -117,7 +117,7 @@ class Team_List extends Base {
             ]
         );
 
-        self::$widget->select2_control( 'category', __( 'One-Category Team List', 'booth-elementor' ), '', self::get_taxonomies(), true,
+        self::$widget->select2_control( 'category', __( 'One-Category Team List', 'booth-elementor' ), '', self::get_taxonomies(), false,
             [
                 'label_block' => true,
                 'description' => __( 'Select category item (leave empty for showing all categories)', 'booth-elementor' ),
