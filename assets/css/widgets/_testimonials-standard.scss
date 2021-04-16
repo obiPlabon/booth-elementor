@@ -1,0 +1,92 @@
+/* ==========================================================================
+   Testimonials standard style - begin
+   ========================================================================== */
+
+.qodef-testimonials-holder {
+    
+    &.qodef-testimonials-standard {
+        text-align: center;
+
+        .qodef-testimonial-quote {
+            @include qodefRelativeHolderLayout();
+            margin: 25px 0 0;
+
+            img {
+                display: block;
+                margin: 0 auto;
+                max-width: 128px;
+            }
+        }
+
+        .qodef-testimonial-title {
+            margin: 0;
+        }
+
+        .qodef-testimonial-author {
+            margin: 24px 0 0;
+            
+            span {
+                display: block;
+            }
+            
+            .qodef-testimonials-author-name {
+                font-size: 24px;
+            }
+            
+            .qodef-testimonials-author-job {
+                font-size: 16px;
+                font-weight: 500;
+                text-transform: uppercase;
+                font-family: $alternate-heading-font;
+                line-height: 2em;
+            }
+        }
+
+        .qodef-testimonial-text {
+            margin: 28px 0 0;
+            padding: 0 15%;
+            color: #a7a9ac;
+            font-size: 22px;
+            line-height: 1.65em;
+            font-weight: 300;
+        }
+    
+        .qodef-owl-slider {
+            .owl-dots {
+                margin: 39px 0 0;
+            }
+        }
+
+        /* Light/Dark styles */
+        &.qodef-testimonials-light {
+            
+            .qodef-testimonial-title,
+            .qodef-testimonial-text,
+            .qodef-testimonial-author {
+                color: #fff;
+            }
+
+            .owl-dots {
+                
+                .owl-dot {
+                    
+                    span {
+                        background-color: rgba(#fff, .4);
+                    }
+                    
+                    &:hover,
+                    &.active {
+
+                        span {
+                            background-color: #fff;
+                            border-color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/* ==========================================================================
+   Testimonials standard style - end
+   ========================================================================== */

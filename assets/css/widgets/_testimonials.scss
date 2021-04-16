@@ -1,0 +1,53 @@
+/* ==========================================================================
+   Testimonials shortcode style - begin
+   ========================================================================== */
+
+.qodef-testimonials-holder {
+    @include qodefRelativeHolderLayout();
+    
+    .qodef-testimonials,
+    .qodef-testimonial-content,
+    .qodef-testimonial-text-holder {
+        @include qodefRelativeHolderLayout();
+    }
+
+    .qodef-testimonials {
+        box-sizing: border-box;
+
+        .owl-stage {
+            cursor: grab;
+        }
+    }
+
+    .qodef-testimonial-image {
+
+        img {
+            width: auto !important;
+            border-radius: 5em;
+        }
+    }
+}
+
+.qodef-testimonials-main {
+    
+    .owl-item {
+
+        .qodef-testimonial-content {
+            clip-path: inset(0 0 100% 0);
+            transform: translateY(20px);
+            transition: 1s;
+        }
+
+        &.qodef-appear {
+            
+            .qodef-testimonial-content {
+                transform: translateY(0);
+                clip-path: inset(0 0 0 0);
+            }
+        }
+    }
+}
+
+/* ==========================================================================
+   Testimonials shortcode style - end
+   ========================================================================== */

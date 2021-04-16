@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Testimonials elegant style - begin
+   ========================================================================== */
+
+.qodef-testimonials-holder {
+
+    &.qodef-testimonials-carousel {
+        
+        @include phone-landscape {
+            .qodef-testimonial-title {
+                line-height: 1.25em;
+            }
+        }
+    
+    }
+}
+
+/* ==========================================================================
+   Testimonials elegant style - end
+   ========================================================================== */

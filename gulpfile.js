@@ -6,6 +6,7 @@ const autoPrefixer                 = require('gulp-autoprefixer');
 const plumberNotifier              = require('gulp-plumber-notifier');
 const concat                       = require('gulp-concat');
 const cssbeautify                  = require('gulp-cssbeautify');
+const sass                         = require('gulp-sass');
 
 const AUTOPREFIXER_BROWSERS = [
     'last 2 version',
@@ -21,12 +22,15 @@ const AUTOPREFIXER_BROWSERS = [
     'bb >= 10'
 ];
 
+// const frontendSassFiles = 'assets/css/widgets/*.scss';
 const frontendSassFiles = 'assets/css/widgets/*.css';
 
 function makeFrontendCSS() {
     return src(frontendSassFiles)
         .pipe(plumberNotifier())
+		// .pipe(sass())
         .pipe(autoPrefixer(AUTOPREFIXER_BROWSERS))
+		// .pipe(csscomb())
         .pipe(cssbeautify())
 		.pipe(concat('booth-elementor.css'))
 		.pipe(dest('assets/css'))

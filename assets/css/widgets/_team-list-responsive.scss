@@ -1,0 +1,169 @@
+/* ==========================================================================
+# Team list responsive style - begin
+========================================================================== */
+
+.qodef-team-list-holder {
+	
+	@media only screen and (min-width: 1025px) {
+		&.qodef-five-columns {
+			.qodef-item-space {
+				&.info-hover {
+					width: 20%;
+					
+					&:nth-child(4n+1) {
+						clear: unset;
+					}
+				}
+			}
+		}
+	}
+	
+	&.qodef-two-columns {
+		.qodef-team {
+			&.info-bellow {
+				@media only screen and (min-width: 681px) {
+					&:nth-child(even) {
+						.qodef-team-inner {
+							display: flex;
+							flex-direction: column;
+							
+							.qodef-team-image {
+								order: 2;
+							}
+							.qodef-team-info {
+								order: 1;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	&.qodef-three-columns {
+		.qodef-team {
+			&.info-bellow {
+				@media only screen and (min-width: 769px) {
+					&:nth-child(3n+2) {
+						.qodef-team-inner {
+							display: flex;
+							flex-direction: column;
+							
+							.qodef-team-image {
+								order: 2;
+							}
+							.qodef-team-info {
+								order: 1;
+							}
+						}
+					}
+				}
+				
+				@media only screen and (min-width: 681px) and (max-width: 768px){
+					&:nth-child(even) {
+						.qodef-team-inner {
+							display: flex;
+							flex-direction: column;
+							
+							.qodef-team-image {
+								order: 2;
+							}
+							.qodef-team-info {
+								order: 1;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	&.qodef-four-columns {
+		.qodef-team {
+			&.info-bellow {
+				@media only screen and (min-width: 1025px) {
+					&:nth-child(even) {
+						.qodef-team-inner {
+							display: flex;
+							flex-direction: column;
+							
+							.qodef-team-image {
+								order: 2;
+							}
+							.qodef-team-info {
+								order: 1;
+							}
+						}
+					}
+				}
+				
+				@media only screen and (min-width: 769px) and (max-width: 1024px){
+					&:nth-child(3n+2) {
+						.qodef-team-inner {
+							display: flex;
+							flex-direction: column;
+							
+							.qodef-team-image {
+								order: 2;
+							}
+							.qodef-team-info {
+								order: 1;
+							}
+						}
+					}
+				}
+				
+				@media only screen and (min-width: 681px) and (max-width: 768px){
+					&:nth-child(even) {
+						.qodef-team-inner {
+							display: flex;
+							flex-direction: column;
+							
+							.qodef-team-image {
+								order: 2;
+							}
+							.qodef-team-info {
+								order: 1;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@include laptop-landscape-mac {
+	.qodef-team-modal-holder {
+		.qodef-team-popup-content {
+			max-width: 335px;
+		}
+		
+		.qodef-team-popup-info-holder {
+			padding: 25px 30px;
+		}
+	}
+}
+
+
+@include phone-portrait {
+	
+	.qodef-team-modal-holder {
+		width: 100%;
+		
+		.qodef-team-popup-content {
+			max-width: 90%;
+		}
+		
+		.qodef-team-info-section {
+			a {
+				display: block;
+			}
+		}
+	}
+
+}
+
+/* ==========================================================================
+# Team list style - end
+========================================================================== */

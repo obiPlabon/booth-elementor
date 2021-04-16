@@ -42,6 +42,19 @@ class Assets_Manager {
 			true
 		);
 
+		/* wp_enqueue_script( 'booth-jquery-plugin',
+			BOOTH_ELEMENTOR_ASSETS . '/vendor/js/jquery.plugin.js',
+			array( 'jquery' ),
+			BOOTH_ELEMENTOR_VERSION,
+			true
+		);
+		wp_enqueue_script( 'booth-countdown',
+			BOOTH_ELEMENTOR_ASSETS . '/vendor/js/jquery.countdown.min.js',
+			array( 'jquery' ),
+			BOOTH_ELEMENTOR_VERSION,
+			true
+		); */
+
 		//Localize scripts
 		wp_localize_script(
 			'booth-elementor',

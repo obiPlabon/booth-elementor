@@ -1,0 +1,263 @@
+/* ==========================================================================
+# Team list - begin
+	========================================================================== */
+
+.qodef-team-list-holder {
+    @include qodefRelativeHolderLayout();
+    
+    .qodef-team {
+        &.info-bellow {
+            .qodef-team-image {
+                margin: 0 0 27px;
+            }
+
+            .qodef-team-info {
+                margin-bottom: 20px;
+            }
+
+            .qodef-team-title-holder {
+                margin: 0;
+            }
+
+            .qodef-team-name {
+                margin: 0 0 8px;
+                font-size: 24px;
+                line-height: 1.33em;
+                
+                a {
+                    &:hover {
+                        color: inherit;
+                    }
+                }
+            }
+
+            .qodef-team-position {
+                margin: 6px 0 16px;
+                font-size: 16px;
+                color: $first-main-color;
+                font-family: $alternate-heading-font;
+                text-transform: uppercase;
+            }
+        }
+        
+        &.info-hover {
+            .qodef-team-name {
+                font-size: 40px;
+                color: #fff;
+                line-height: 1.075em;
+                width: 80%;
+                
+                a {
+                    &:hover {
+                        color: #fff;
+                    }
+                }
+            }
+    
+            .qodef-team-position {
+                margin: 0;
+                padding: 5px 0 10px;
+                font-size: 16px;
+                color: #fff;
+                font-family: $alternate-heading-font;
+                text-transform: uppercase;
+            }
+            
+        }
+        
+    }
+    
+    &.qodef-large-space {
+        .qodef-outer-space {
+            .qodef-item-space {
+                margin: 0 0 65px;
+                padding: 0 20px;
+            }
+        }
+    }
+    
+}
+
+/*Popup style*/
+.qodef-team-modal-holder{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100% + 17px); //hide scrollbar
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: rgba(#000,0.8);
+    z-index: 10000;
+    display: none;
+
+    .qodef-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 47px;
+        height: 47px;
+        font-size: 24px;
+        line-height: 47px;
+        text-align: center;
+        cursor: pointer;
+        transition: color .2s ease-out;
+        background-color: $first-main-color;
+        color: #fff;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: $second-main-color;
+        }
+    }
+
+    .qodef-team-popup {
+        display: table;
+        width: 100%;
+        height: 100%;
+    }
+
+    .qodef-team-popup-inner {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .qodef-team-popup-content {
+        max-width: 424px;
+        margin: auto auto;
+        background-color: #fff;
+        transform: translate3d(0,0,0);
+
+        img {
+            display: block;
+        }
+    }
+
+    .qodef-team-popup-image-holder {
+        @include qodefRelativeHolderLayout();
+    }
+    
+    .qodef-team-position-holder {
+        font-size: 14px;
+        line-height: 1.3em;
+        letter-spacing: .15em;
+        color: $first-main-color;
+    }
+
+    .qodef-team-title-holder {
+        display: table;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+
+        .qodef-team-name{
+            display: table-cell;
+            vertical-align: middle;
+            margin: 0;
+            font-size: 32px;
+            color: #fff;
+            padding-bottom: 3px;
+        }
+    }
+
+    .qodef-team-popup-info-holder {
+        @include qodefRelativeHolderLayout();
+        padding: 45px 50px 30px;
+        box-sizing: border-box;
+        background-image: url('/wp-content/themes/booth/assets/img/default_pattern.png');
+    }
+
+    &.qodef-modal-opened {
+        .qodef-team-popup-content {
+            visibility: visible;
+            transform: translate3d(0,0,0);
+        }
+    }
+
+    .qodef-team-popup-image {
+        position: relative;
+
+        &.qodef-team-popup-image-bgrnd {
+            background-size:cover;
+            background-position: center 20%;
+            background-repeat: no-repeat;
+            padding-top: 43.75%;
+        }
+    }
+
+    .qodef-team-info-section {
+
+        &.qodef-excerpt-section {
+            margin: 0 0 30px;
+            
+            p {
+                color: #fff;
+            }
+        }
+
+        &:not(.qodef-excerpt-section) {
+            margin: 0 0 15px;
+            line-height: 1.2em;
+
+            .qodef-team-info-section-title {
+                display: inline-block;
+                position: relative;
+                min-width: 85px;
+                margin: 0 0 2px;
+                color: #fff;
+                font-family: $alternate-heading-font;
+                font-size: 16px;
+                text-transform: uppercase;
+            }
+
+            a {
+                color: $first-main-color;
+
+                &:hover {
+                    color: #fff;
+                }
+            }
+
+            .qodef-team-info-social {
+
+                .qodef-icon-shortcode {
+                    margin: 0 8px;
+                    font-size: 18px;
+
+                    &:first-child {
+                        margin-left: 0;
+                    }
+
+                    .qodef-icon-element {
+                        transition: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.qodef-team-spinner {
+    display: none;
+
+    .qodef-team-pulse {
+        position:absolute;
+        top: calc(50% - 15px);
+        left: calc(50% - 22px);
+        width: 30px;
+        height: 30px;
+        background-color: #fff;
+        border-radius: 100%;
+        -webkit-animation: scaleout 1.6s infinite ease;
+        animation: scaleout 1.6s infinite ease;
+
+        &:last-child{
+            -webkit-animation-delay: -0.6s;
+            animation-delay: -0.6s;
+        }
+    }
+}
+/* ==========================================================================
+# Team list - end
+========================================================================== */

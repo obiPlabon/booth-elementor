@@ -2,6 +2,7 @@
 
 namespace Booth_Elementor\Widget;
 
+use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Repeater;
@@ -13,7 +14,13 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 
-trait Control_Ui {
+class Control_Ui  {
+
+	private $widget;
+
+    public function __construct($widget) {
+        $this->widget = $widget;
+    }
 
 	/**
 	 * extend extra control option
@@ -36,12 +43,12 @@ trait Control_Ui {
 	 */
     private function add_control_args( $id = '', $arguments = [], $responsive = false ) {
         if ($responsive) {
-            $this->add_responsive_control(
+            $this->widget->add_responsive_control(
                 $id,
                 $arguments
             );
         } else {
-            $this->add_control(
+            $this->widget->add_control(
                 $id,
                 $arguments
             );
@@ -56,7 +63,7 @@ trait Control_Ui {
 	 * @return void
 	 */
     private function add_group_control_args( $type, $arguments ) {
-        $this->add_group_control(
+        $this->widget->add_group_control(
             $type,
             $arguments
         );
@@ -70,12 +77,12 @@ trait Control_Ui {
 	 * @param object $tab
 	 * @return void
 	 */
-    public function __start_section( $id, $label, $tab_name = 'content' ) {
+    public function __start( $id, $label, $tab_name = 'content' ) {
 		$tab = [
 			'content' => Controls_Manager::TAB_CONTENT,
 			'style' => Controls_Manager::TAB_STYLE,
 		];
-        $this->start_controls_section(
+        $this->widget->start_controls_section(
             $id,
             [
                 'label' => $label,
@@ -86,12 +93,12 @@ trait Control_Ui {
 
 
 
-    public function __end_section() {
-        return $this->end_controls_section();
+    public function __end() {
+        return $this->widget->end_controls_section();
     }
 
     /* Controls */
-    public function add_text_control( $id, $label, $default = '', $placeholder = '', $dynamic = true, $extra = [] ) {
+    public function text_control( $id, $label, $default = '', $placeholder = '', $dynamic = true, $extra = [] ) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'type' => Controls_Manager::TEXT,
@@ -104,7 +111,7 @@ trait Control_Ui {
         $this->add_control_args($id, $arguments);
     }
 
-    public function add_textarea_control( $id, $label, $default = '', $placeholder = '', $dynamic = true, $extra = [] ) {
+    public function textarea_control( $id, $label, $default = '', $placeholder = '', $dynamic = true, $extra = [] ) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'label_block' => true,
@@ -118,7 +125,7 @@ trait Control_Ui {
         $this->add_control_args($id, $arguments);
     }
 
-    public function add_wysiwyg_control( $id, $label, $default = '', $placeholder = '', $dynamic = true, $extra = [] ) {
+    public function wysiwyg_control( $id, $label, $default = '', $placeholder = '', $dynamic = true, $extra = [] ) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'label_block' => true,
@@ -132,7 +139,7 @@ trait Control_Ui {
 		$this->add_control_args($id, $arguments);
 	}
 
-    public function add_number_control($id, $label, $default = '', $placeholder = '', $min = '0',  $max = '100', $step = '1', $dynamic = true, $extra = [] ) {
+    public function number_control($id, $label, $default = '', $placeholder = '', $min = '0',  $max = '100', $step = '1', $dynamic = true, $extra = [] ) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'type' => Controls_Manager::NUMBER,
@@ -148,7 +155,7 @@ trait Control_Ui {
 		$this->add_control_args($id, $arguments);
 	}
 
-    public function add_url_control($id, $label, $default = [ 'url' => '', 'is_external' => true, 'nofollow' => true ], $placeholder = '', $dynamic = true, $extra = []) {
+    public function url_control($id, $label, $default = [ 'url' => '', 'is_external' => true, 'nofollow' => true ], $placeholder = '', $dynamic = true, $extra = []) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'type' => Controls_Manager::URL,
@@ -162,7 +169,7 @@ trait Control_Ui {
 		$this->add_control_args($id, $arguments);
 	}
 
-    public function add_media_control( $id, $label, $default = [], $dynamic = true, $extra = [] ) {
+    public function media_control( $id, $label, $default = [], $dynamic = true, $extra = [] ) {
         $arguments = $this->extend_arguments([
             'type' => Controls_Manager::MEDIA,
             'label' => $label,
@@ -174,7 +181,7 @@ trait Control_Ui {
         $this->add_control_args($id, $arguments);
     }
 
-    public function add_gallery_control( $id, $label, $default = [], $dynamic = true, $extra = [] ) {
+    public function gallery_control( $id, $label, $default = [], $dynamic = true, $extra = [] ) {
         $arguments = $this->extend_arguments([
             'type' => Controls_Manager::GALLERY,
             'label' => $label,
@@ -186,7 +193,7 @@ trait Control_Ui {
         $this->add_control_args($id, $arguments);
 	}
 
-    public function add_hidden_control( $id, $label, $default = '', $extra = [] ) {
+    public function hidden_control( $id, $label, $default = '', $extra = [] ) {
         $arguments = $this->extend_arguments([
             'type' => Controls_Manager::HIDDEN,
             'label' => $label,
@@ -195,7 +202,7 @@ trait Control_Ui {
 		$this->add_control_args($id, $arguments);
 	}
 
-    public function add_switcher_control($id, $label, $default = 'yes', $label_on = '', $label_off = '', $return_value = 'yes', $extra = []) {
+    public function switcher_control($id, $label, $default = 'yes', $return_value = 'yes', $label_on = '', $label_off = '', $extra = []) {
         $arguments = $this->extend_arguments([
             'label'        => $label,
             'type'         => Controls_Manager::SWITCHER,
@@ -207,7 +214,7 @@ trait Control_Ui {
         $this->add_control_args($id, $arguments);
     }
 
-    public function add_popover_toggle_control($id, $label, $default = 'yes', $label_on = '', $label_off = '', $return_value = 'yes', $extra = []) {
+    public function popover_toggle_control($id, $label, $default = 'yes', $label_on = '', $label_off = '', $return_value = 'yes', $extra = []) {
         $arguments = $this->extend_arguments([
             'label'        => $label,
             'type'         => Controls_Manager::POPOVER_TOGGLE,
@@ -219,7 +226,7 @@ trait Control_Ui {
 		$this->add_control_args($id, $arguments);
 	}
 
-    public function add_select_control($id, $label, $default = '', $options = [], $extra = []) {
+    public function select_control($id, $label, $default = '', $options = [], $extra = []) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'type' => Controls_Manager::SELECT,
@@ -229,7 +236,7 @@ trait Control_Ui {
         $this->add_control_args($id, $arguments);
     }
 
-    public function add_select2_control($id, $label, $default = '', $options = [], $multiple = false, $extra = []) {
+    public function select2_control($id, $label, $default = '', $options = [], $multiple = false, $extra = []) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'type' => Controls_Manager::SELECT2,
@@ -240,7 +247,7 @@ trait Control_Ui {
         $this->add_control_args($id, $arguments);
     }
 
-    public function add_choose_control($id, $label, $default = '', $options = [], $toggle = false, $selectors = [], $extra = []) {
+    public function choose_control($id, $label, $default = '', $options = [], $toggle = false, $selectors = [], $extra = []) {
 		$default_option = [
 			'left' => [
 				'title' => __( 'Left', 'happy-elementor-addons' ),
@@ -267,7 +274,7 @@ trait Control_Ui {
         $this->add_control_args($id, $arguments);
 	}
 
-	public function add_color_control($id, $label, $default = '', $selectors = [], $extra=[]) {
+	public function color_control($id, $label, $default = '', $selectors = [], $extra=[]) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'type' => Controls_Manager::COLOR,
@@ -277,7 +284,7 @@ trait Control_Ui {
         $this->add_control_args($id, $arguments);
     }
 
-	public function add_icon_control($id, $label, $default = 'fa fa-facebook', $options = [], $include = [], $exclude = [], $extra=[]) {
+	public function icon_control($id, $label, $default = 'fa fa-facebook', $options = [], $include = [], $exclude = [], $extra=[]) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'type' => Controls_Manager::ICON,
@@ -289,7 +296,7 @@ trait Control_Ui {
 		$this->add_control_args($id, $arguments);
     }
 
-	public function add_icons_control($id, $label, $default = [ 'value' => 'fas fa-star', 'library' => 'solid'], $recommended = [], $skin = 'media', $extra=[]) {
+	public function icons_control($id, $label, $default = [ 'value' => 'fas fa-star', 'library' => 'solid'], $recommended = [], $skin = 'media', $extra=[]) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'type' => Controls_Manager::ICONS,
@@ -300,7 +307,7 @@ trait Control_Ui {
 		$this->add_control_args($id, $arguments);
     }
 
-	public function add_date_control($id, $label, $default = '', $picker_options = ['enableTime' => true,'minuteIncrement' => '1'], $extra=[]) {
+	public function date_control($id, $label, $default = '', $picker_options = ['enableTime' => true,'minuteIncrement' => '1'], $extra=[]) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'type' => Controls_Manager::DATE_TIME,
@@ -310,7 +317,7 @@ trait Control_Ui {
 		$this->add_control_args($id, $arguments);
     }
 
-	public function add_animation_control($id, $label, $default = '', $prefix_class = 'animated ', $extra=[]) {
+	public function animation_control($id, $label, $default = '', $prefix_class = 'animated ', $extra=[]) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'type' => Controls_Manager::ANIMATION,
@@ -320,7 +327,7 @@ trait Control_Ui {
 		$this->add_control_args($id, $arguments);
     }
 
-	public function add_hover_animation_control($id, $label, $default = '', $prefix_class = 'elementor-animation-', $extra=[]) {
+	public function hover_animation_control($id, $label, $default = '', $prefix_class = 'elementor-animation-', $extra=[]) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'type' => Controls_Manager::HOVER_ANIMATION,
@@ -330,17 +337,18 @@ trait Control_Ui {
 		$this->add_control_args($id, $arguments);
     }
 
-    public function add_repater_control($repeater, $id, $title = '', $extra = []) {
+    public function repater_control($repeater, $id, $title = '', $extra = []) {
         $arguments = $this->extend_arguments([
             'show_label' => false,
             'type' => Controls_Manager::REPEATER,
             'fields' => $repeater->get_controls(),
-            'title_field' => '<# print(title || "EasyGrid Item"); #>',
+            'title_field' => $title ? '{{{ '.$title.' }}}' : '',
+            // 'title_field' => '<# print(title || "Item"); #>',
         ], $extra);
         $this->add_control_args($id, $arguments);
     }
 
-    public function add_image_size_group_control($name, $label = '', $default = '', $label_block = true, $extra = []) {
+    public function image_size_control($name, $label = '', $default = '', $label_block = true, $extra = []) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'label_block' => $label_block,
@@ -350,7 +358,7 @@ trait Control_Ui {
         $this->add_group_control_args(Group_Control_Image_Size::get_type(), $arguments);
     }
 
-    public function add_slider_control($id, $label, $size_units = [], $range = [], $default = [], $label_block = true, $extra = []) {
+    public function slider_control($id, $label, $size_units = [], $range = [], $default = [], $label_block = true, $extra = []) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'label_block' => $label_block,
@@ -359,11 +367,11 @@ trait Control_Ui {
             'range' => $range,
             'default' => $default,
         ], $extra);
-        $this->add_control_args($id, $arguments, true);
+        $this->add_control_args($id, $arguments, false);
     }
 
 
-    public function add_typography_control($name, $label = '', $label_block = true, $extra = []) {
+    public function typography_control($name, $label = '', $label_block = true, $extra = []) {
         $arguments = $this->extend_arguments([
             'label' => $label,
             'label_block' => $label_block,
@@ -373,5 +381,16 @@ trait Control_Ui {
         $this->add_group_control_args(Group_Control_Typography::get_type(), $arguments);
     }
     /* End Controls */
+
+	/** Repater  **/
+    public function create_repeater() {
+        $repeater = new Repeater();
+        return new self($repeater);
+    }
+
+    public function get_controls() {
+        return $this->widget->get_controls();
+    }
+    /** End Repater  **/
 
 }
