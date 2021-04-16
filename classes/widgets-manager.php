@@ -23,6 +23,7 @@ class Widgets_Manager {
 			'faq',
 			'countdown',
 			'team-list',
+			'testimonials',
         ];
 
 		return apply_filters( 'booth_elementor__widget_map', $map );

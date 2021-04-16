@@ -1,0 +1,13 @@
+.qodef-testimonials-holder {
+    
+    &.qodef-testimonials-standard {
+
+        @include ipad-landscape {
+
+            .qodef-testimonial-text {
+                padding: 0;
+            }
+            
+        }
+    }
+}
