@@ -20,4 +20,4 @@ jobs:
         server: ftp.obiplabon.im
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
-        server-dir: wp-content/plugins
+        server-dir: ./wp-content/plugins/
