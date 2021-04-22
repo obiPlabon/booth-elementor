@@ -1,0 +1,23 @@
+/* ==========================================================================
+   Pricing Tables shortcode responsive style - begin
+   ========================================================================== */
+
+@include ipad-landscape {
+    .qodef-pt-transparent {
+        .qodef-price-table {
+            .qodef-pt-inner {
+                ul  {
+                    li.qodef-pt-button {
+                        padding: 25px 0px 0px 20%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+/* ==========================================================================
+   Pricing Tables shortcode responsive style - end
+   ========================================================================== */
