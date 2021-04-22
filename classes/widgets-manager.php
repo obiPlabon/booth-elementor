@@ -27,6 +27,7 @@ class Widgets_Manager {
 			'event-list',
 			'pricing-table',
 			'button',
+			'quote',
         ];
 
 		return apply_filters( 'booth_elementor__widget_map', $map );
