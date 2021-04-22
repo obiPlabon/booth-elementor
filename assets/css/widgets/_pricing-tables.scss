@@ -1,0 +1,147 @@
+/* ==========================================================================
+   Pricing Tables shortcode style - begin
+   ========================================================================== */
+
+.qodef-pricing-tables {
+    @include qodefRelativeHolderLayout();
+}
+
+.qodef-price-table {
+
+    .qodef-pt-inner {
+        @include qodefRelativeHolderLayout();
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin: 0;
+                padding: 0 0 0 20%;
+
+                &.qodef-pt-title-holder {
+                    position: relative;
+                    color: $default-heading-color;
+                    font-size: 18px;
+                    line-height: 26px;
+                    font-weight: 600;
+	                
+                    .qodef-pt-title {
+                        margin: 0;
+                        padding: 15px 0 10px;
+                        display: block;
+	                    box-sizing: border-box;
+                        font-family: $default-heading-font;
+                    }
+                    
+                    .qodef-pt-mark {
+                        position: relative;
+                        display: block;
+                        margin: 1px 0 0;
+                        font-size: 14px;
+                        font-family: $default-text-font;
+                    }
+                }
+
+                &.qodef-pt-prices {
+                    position: relative;
+                    padding: 49px 0 0 20%;
+	                
+                    .qodef-pt-value {
+                        position: relative;
+                        vertical-align: super;
+                        bottom: -8px;
+                        font-size: 48px;
+                        line-height: 1em;
+                        color: $default-heading-color;
+                        font-family: $default-heading-font;
+                    }
+
+                    .qodef-pt-price {
+                        position: relative;
+                        display: inline-block;
+                        vertical-align: middle;
+	                    left: -5px;
+                        font-size: 72px;
+                        line-height: 1em;
+                        color: $default-heading-color;
+                        font-family: $default-heading-font;
+                    }
+                }
+
+                &.qodef-pt-content {
+	                padding: 20px 0 0;
+                    font-size: 15px;
+                    line-height: 1.87em;
+    
+                    li {
+                        &:before {
+                            content: "\4e";
+                            font-family: 'ElegantIcons';
+                            font-size: 18px;
+                            padding-right: 10px;
+                            color: $first-main-color;
+                        }
+                    }
+                    
+                }
+
+                &.qodef-pt-button {
+                    padding: 25px 0 55px 20%;
+                }
+            }
+        }
+    }
+}
+
+.qodef-pt-transparent {
+    .qodef-price-table {
+        .qodef-pt-inner {
+            background-color: transparent;
+        }
+    }
+}
+
+.qodef-pt-pattern {
+    .qodef-price-table {
+        .qodef-pt-inner {
+            background-image: url('/wp-content/themes/booth/assets/img/default_pattern.png');
+            background-repeat: repeat;
+    
+            .qodef-pt-mark, .qodef-pt-content {
+                color: #fff;
+            }
+    
+            .qodef-pt-button {
+                a {
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+.qodef-pt-background {
+    .qodef-price-table {
+        .qodef-pt-inner {
+            background-color: #2a1a2c;
+        }
+        .qodef-pt-mark, .qodef-pt-content {
+            color: #fff;
+        }
+        .qodef-pt-button {
+            a {
+                color: #fff;
+            }
+        }
+    }
+}
+
+.qodef-ms-explorer {
+    .qodef-price-table .qodef-pt-inner ul li.qodef-pt-prices .qodef-pt-value {
+        font-size: 54px;
+    }
+}
+/* ==========================================================================
+   Pricing Tables shortcode style - end
+   ========================================================================== */
