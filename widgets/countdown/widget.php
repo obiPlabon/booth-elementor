@@ -23,7 +23,7 @@ class Countdown extends Base {
     }
 
 	public function get_keywords() {
-		return ['test'];
+		return ['booth','countdown','count'];
 	}
 
 	public function scripts_register() {
@@ -262,7 +262,7 @@ class Countdown extends Base {
 
 	protected function render() {
 		// return;
-		
+
 		$settings = $this->get_settings_for_display();
 
 

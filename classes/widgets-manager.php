@@ -28,6 +28,7 @@ class Widgets_Manager {
 			'pricing-table',
 			'button',
 			'quote',
+			'info-table',
         ];
 
 		return apply_filters( 'booth_elementor__widget_map', $map );

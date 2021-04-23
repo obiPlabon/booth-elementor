@@ -37,7 +37,7 @@ class Event_List extends Base {
     }
 
     public function get_keywords() {
-        return ['booth', 'event-list'];
+        return ['booth', 'event-list', 'event', 'list'];
     }
 
     /**

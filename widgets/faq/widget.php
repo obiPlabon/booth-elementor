@@ -20,7 +20,7 @@ class Faq extends Base {
     }
 
 	public function get_keywords() {
-		return ['test'];
+		return ['booth', 'faq'];
 	}
 
 	public function get_script_depends() {

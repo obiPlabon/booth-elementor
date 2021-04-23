@@ -26,7 +26,7 @@ class Team_List extends Base {
     }
 
     public function get_keywords() {
-        return ['booth', 'team-list'];
+        return ['booth', 'team-list', 'team', 'list'];
     }
 
     /**
