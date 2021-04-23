@@ -343,6 +343,7 @@ class Pricing_Table extends Base {
 		$content	= $settings['content'];
 		$link	= $settings['link'];
 		$target	= $settings['target'];
+		$button_text	= $settings['button_text'];
 		$button_text_color	= $settings['button_text_color'];
 
 		$holder_classes      = $this->getInnerHolderClasses( $settings );
