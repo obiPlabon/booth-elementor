@@ -14,11 +14,8 @@ use \Elementor\Group_Control_Box_Shadow;
 
 class Countdown extends Base {
 
-	protected static $widget;
-
 	public function __construct($data = array(), $args = null) {
 		parent::__construct($data, $args);
-		self::$widget = new Control_Ui($this);
 
 		// add_action( 'elementor/frontend/before_enqueue_scripts', [ $this, 'scripts_enqueue' ] );
 		// add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'scripts_enqueue' ] );
@@ -217,52 +214,161 @@ class Countdown extends Base {
 
     protected function register_content_controls() {
 
-		self::$widget->__start('countdown_settings_content', __('Countdown','booth-elementor'));
-
-		self::$widget->select_control( 'skin', __( 'Skin','booth-elementor'), '',
+		$this->start_controls_section(
+			'countdown_settings_content',
 			[
-				''=> __( 'Default', 'booth-elementor' ),
-				'qodef-light-skin'=> __( 'Light', 'booth-elementor' ),
+				'label' => __( 'Countdown', 'booth-elementor' ),
+				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
 
-		self::$widget->select_control( 'year', __( 'Year','booth-elementor'), '',$this->get_year());
-
-		self::$widget->select_control( 'month', __( 'Month','booth-elementor'), '',$this->get_month());
-
-		self::$widget->select_control( 'day', __( 'Day','booth-elementor'), '',$this->get_day());
-		self::$widget->select_control( 'hour', __( 'Hour','booth-elementor'), '',$this->get_hour());
-		self::$widget->select_control( 'minute', __( 'Minute','booth-elementor'), '',$this->get_minute());
-
-
-		self::$widget->text_control('month_label',__('Months Label','booth-elementor'),__('Months','booth-elementor'));
-		self::$widget->text_control('day_label',__('Day Label','booth-elementor'),__('Days','booth-elementor'));
-		self::$widget->text_control('hour_label',__('Hours Label','booth-elementor'),__('Hours','booth-elementor'));
-		self::$widget->text_control('minute_label',__('Minutes Label','booth-elementor'),__('Minutes','booth-elementor'));
-		self::$widget->text_control('second_label',__('Seconds Label','booth-elementor'),__('Seconds','booth-elementor'));
-
-		self::$widget->number_control('digit_font_size',__('Digit Font Size (px)','booth-elementor'),'','','0','1000','1');
-		self::$widget->number_control('label_font_size',__('Label Font Size(px)','booth-elementor'),'','','0','1000','1');
-
-		// $range = [
-		// 	'px' => [
-		// 		'min' => 0,
-		// 		'max' => 1000,
-		// 		'step' => 1,
-		// 	],
-		// ];
-		// self::$widget->slider_control('digit_font_size',__('Digit Font Size','booth-elementor'),[ 'px'],$range);
-		// self::$widget->slider_control('label_font_size',__('Label Font Size','booth-elementor'),[ 'px'],$range);
-
-
-		self::$widget->text_control('custom_class',__('Custom CSS Class','booth-elementor'),'','',false,
+		$this->add_control(
+			'skin',
 			[
-			'label_block'=>true,
-			'description'=>__('Style particular content element differently - add a class name and refer to it in custom CSS','booth-elementor')
+				'label' => __( 'Skin', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => '',
+				'options' =>  [
+					''=> __( 'Default', 'booth-elementor' ),
+					'qodef-light-skin' => __( 'Light', 'booth-elementor' ),
+				],
 			]
 		);
 
-		self::$widget->__end();
+		$this->add_control(
+			'year',
+			[
+				'label' => __( 'Year', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => '',
+				'options' =>  $this->get_year(),
+			]
+		);
+
+		$this->add_control(
+			'month',
+			[
+				'label' => __( 'Month', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => '',
+				'options' =>  $this->get_month(),
+			]
+		);
+
+		$this->add_control(
+			'day',
+			[
+				'label' => __( 'Day', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => '',
+				'options' =>  $this->get_day(),
+			]
+		);
+
+		$this->add_control(
+			'hour',
+			[
+				'label' => __( 'Hour', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => '',
+				'options' =>  $this->get_hour(),
+			]
+		);
+
+		$this->add_control(
+			'minute',
+			[
+				'label' => __( 'Minute', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => '',
+				'options' =>  $this->get_minute(),
+			]
+		);
+
+		$this->add_control(
+			'month_label',
+			[
+				'label' => __( 'Months Label', 'booth-elementor' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => 'Months',
+			]
+		);
+
+		$this->add_control(
+			'day_label',
+			[
+				'label' => __( 'Day Label', 'booth-elementor' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => 'Day',
+			]
+		);
+
+		$this->add_control(
+			'hour_label',
+			[
+				'label' => __( 'Hours Label', 'booth-elementor' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => 'Hours',
+			]
+		);
+
+		$this->add_control(
+			'minute_label',
+			[
+				'label' => __( 'Minutes Label', 'booth-elementor' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => 'Minutes',
+			]
+		);
+
+		$this->add_control(
+			'second_label',
+			[
+				'label' => __( 'Seconds Label', 'booth-elementor' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => 'Seconds',
+			]
+		);
+
+		$this->add_control(
+			'digit_font_size',
+			[
+				'label' => __( 'Digit Font Size (px)', 'booth-elementor' ),
+				'type' => Controls_Manager::NUMBER,
+				'min' => '0',
+				'max' => '1000',
+				'step' => '1',
+				'dynamic' => [
+					'active' => false,
+				],
+			]
+		);
+
+		$this->add_control(
+			'label_font_size',
+			[
+				'label' => __( 'Label Font Size (px)', 'booth-elementor' ),
+				'type' => Controls_Manager::NUMBER,
+				'min' => '0',
+				'max' => '1000',
+				'step' => '1',
+				'dynamic' => [
+					'active' => false,
+				],
+			]
+		);
+
+        $this->add_control(
+            'custom_class',
+            [
+                'label'       => __( 'Custom CSS Class', 'booth-elementor' ),
+                'label_block' => true,
+                'type'        => Controls_Manager::TEXT,
+                'description' => __( 'Style particular content element differently - add a class name and refer to it in custom CSS', 'booth-elementor' ),
+            ]
+        );
+
+		$this->end_controls_section();
 
     }
 
