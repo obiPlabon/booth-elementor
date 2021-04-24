@@ -2,15 +2,6 @@
 namespace Booth_Elementor\Widget;
 
 use Elementor\Controls_Manager;
-use Elementor\Group_Control_Image_Size;
-use Elementor\Repeater;
-use Elementor\Utils;
-use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
-
-use \Elementor\Group_Control_Background;
-use \Elementor\Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow;
 
 class Testimonials extends Base {
 
@@ -88,85 +79,186 @@ class Testimonials extends Base {
 
     protected function register_content_controls() {
 
-        self::$widget->__start( 'testimonials_settings_content', __( 'Testimonials', 'booth-elementor' ) );
-
-        self::$widget->select_control( 'type', __( 'Type', 'booth-elementor' ), 'standard',
+        $this->start_controls_section(
+            'testimonials_content',
             [
-                'standard' => __( 'Standard', 'booth-elementor' ),
-                'carousel' => __( 'Carousel', 'booth-elementor' ),
+                'label' => __( 'Testimonials', 'booth-elementor' ),
+                'tab'   => Controls_Manager::TAB_CONTENT,
             ]
         );
 
-        self::$widget->select_control( 'skin', __( 'Skin', 'booth-elementor' ), 'light',
+        $this->add_control(
+            'type',
             [
-                ''      => __( 'Default', 'booth-elementor' ),
-                'light' => __( 'Light', 'booth-elementor' ),
+                'label'   => __( 'type', 'booth-elementor' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'standard',
+                'options' => [
+					'standard' => __( 'Standard', 'booth-elementor' ),
+					'carousel' => __( 'Carousel', 'booth-elementor' ),
+				],
             ]
         );
 
-        self::$widget->select_control( 'pattern', __( 'Enable Pattern Background', 'booth-elementor' ), 'no', booth_select_get_yes_no_select_array( false, false ),
+        $this->add_control(
+            'skin',
             [
-                'condition' => [
+                'label'   => __( 'Skin', 'booth-elementor' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'light',
+                'options' => [
+					''      => __( 'Default', 'booth-elementor' ),
+					'light' => __( 'Light', 'booth-elementor' ),
+				],
+            ]
+        );
+
+        $this->add_control(
+            'pattern',
+            [
+                'label'   => __( 'Enable Pattern Background', 'booth-elementor' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'no',
+                'options' => booth_select_get_yes_no_select_array( false, false ),
+				'condition' => [
                     'type' => 'carousel',
                 ],
             ]
         );
 
-        self::$widget->number_control( 'number', __( 'Number of Testimonials', 'booth-elementor' ), '3', '', '1', '1000', '1', false );
-
-        self::$widget->select2_control( 'category', __( 'Category', 'booth-elementor' ), '', self::get_taxonomies(), true,
+        $this->add_control(
+            'number',
             [
-                'label_block' => true,
-                'description' => __( 'Enter one category slug (leave empty for showing all categories)', 'booth-elementor' ),
+                'label'   => __( 'Number of Testimonials', 'booth-elementor' ),
+                'type'    => Controls_Manager::NUMBER,
+                'default' => 3,
+				'min' => 1,
+				'max' => 1000,
+				'step' => 1,
+				'dynamic' => [
+					'active' => false,
+				],
             ]
         );
 
-		self::$widget->__end();
-
-
-		self::$widget->__start( 'slider_settings_content', __( 'Slider Settings', 'booth-elementor' ) );
-
-        self::$widget->select_control( 'number_of_visible_items', __( 'Number Of Visible Items', 'booth-elementor' ), '1',
+        $this->add_control(
+            'category',
             [
-                '1' => __( 'One', 'booth-elementor' ),
-                '2' => __( 'Two', 'booth-elementor' ),
-                '3' => __( 'Three', 'booth-elementor' ),
-                '4' => __( 'Four', 'booth-elementor' ),
-            ],
+                'label'   => __( 'Category', 'booth-elementor' ),
+				'label_block' => true,
+                'type'    => Controls_Manager::SELECT2,
+				'description' => __( 'Enter one category slug (leave empty for showing all categories)', 'booth-elementor' ),
+                'default' => '',
+                'options' => self::get_taxonomies(),
+				'multiple' => true,
+            ]
+        );
+
+		$this->end_controls_section();
+
+
+		$this->start_controls_section(
+            'slider_settings',
             [
-                'condition' => [
+                'label' => __( 'Slider Settings', 'booth-elementor' ),
+                'tab'   => Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'number_of_visible_items',
+            [
+                'label'   => __( 'Number Of Visible Items', 'booth-elementor' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => '1',
+                'options' => [
+					'1' => __( 'One', 'booth-elementor' ),
+					'2' => __( 'Two', 'booth-elementor' ),
+					'3' => __( 'Three', 'booth-elementor' ),
+					'4' => __( 'Four', 'booth-elementor' ),
+				],
+				'condition' => [
                     'type' => 'carousel',
                 ],
             ]
         );
 
-        self::$widget->select_control( 'slider_loop', __( 'Enable Slider Loop', 'booth-elementor' ), 'yes', booth_select_get_yes_no_select_array( false, true ) );
-
-        self::$widget->select_control( 'slider_autoplay', __( 'Enable Slider Loop', 'booth-elementor' ), 'yes', booth_select_get_yes_no_select_array( false, true ) );
-
-        self::$widget->number_control( 'slider_speed', __( 'Slide Duration', 'booth-elementor' ), '5000', '', '1', '1000000', '100', false,
+        $this->add_control(
+            'slider_loop',
             [
+                'label'   => __( 'Enable Slider Loop', 'booth-elementor' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'yes',
+                'options' => booth_select_get_yes_no_select_array( false, true ),
+            ]
+        );
+
+        $this->add_control(
+            'slider_autoplay',
+            [
+                'label'   => __( 'Enable Slider Loop', 'booth-elementor' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'yes',
+                'options' => booth_select_get_yes_no_select_array( false, true ),
+            ]
+        );
+
+        $this->add_control(
+            'slider_speed',
+            [
+                'label'   => __( 'Slide Duration', 'booth-elementor' ),
+                'type'    => Controls_Manager::NUMBER,
 				'description' => __( 'Default value is 5000 (ms)', 'booth-elementor' ),
+                'default' => 5000,
+				'min' => 1,
+				'max' => 1000000,
+				'step' => 100,
+				'dynamic' => [
+					'active' => false,
+				],
             ]
         );
 
-        self::$widget->number_control( 'slider_speed_animation', __( 'Slide Animation Duration', 'booth-elementor' ), '600', '', '1', '1000000', '100', false,
+        $this->add_control(
+            'slider_speed_animation',
             [
+                'label'   => __( 'Slide Animation Duration', 'booth-elementor' ),
+                'type'    => Controls_Manager::NUMBER,
 				'description' => __( 'Speed of slide animation in milliseconds. Default value is 600.', 'booth-elementor' ),
+                'default' => 600,
+				'min' => 1,
+				'max' => 1000000,
+				'step' => 100,
+				'dynamic' => [
+					'active' => false,
+				],
             ]
         );
 
-        self::$widget->select_control( 'slider_navigation', __( 'Enable Slider Navigation Arrows', 'booth-elementor' ), 'yes', booth_select_get_yes_no_select_array( false, true ),
-			[
+        $this->add_control(
+            'slider_navigation',
+            [
+                'label'   => __( 'Enable Slider Navigation Arrows', 'booth-elementor' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'yes',
+                'options' => booth_select_get_yes_no_select_array( false, true ),
 				'condition' => [
 					'type' => 'standard',
 				],
-			]
-		);
+            ]
+        );
 
-        self::$widget->select_control( 'slider_pagination', __( 'Enable Slider Pagination', 'booth-elementor' ), 'yes', booth_select_get_yes_no_select_array( false, true ) );
+        $this->add_control(
+            'slider_pagination',
+            [
+                'label'   => __( 'Enable Slider Pagination', 'booth-elementor' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'yes',
+                'options' => booth_select_get_yes_no_select_array( false, true ),
+            ]
+        );
 
-        self::$widget->__end();
+        $this->end_controls_section();
 
     }
 
