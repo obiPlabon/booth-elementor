@@ -2,31 +2,7 @@
 namespace Booth_Elementor\Widget;
 
 use Elementor\Controls_Manager;
-use Elementor\Group_Control_Image_Size;
-use Elementor\Repeater;
-use Elementor\Utils;
-use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
-
-use \Elementor\Group_Control_Background;
-use \Elementor\Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow;
-
 class Team_List extends Base {
-
-    /**
-     * @var mixed
-     */
-    protected static $widget;
-
-    /**
-     * @param array $data
-     * @param $args
-     */
-    public function __construct( $data = [], $args = null ) {
-        parent::__construct( $data, $args );
-        self::$widget = new Control_Ui( $this );
-    }
 
     /**
      * Get widget title.
@@ -83,78 +59,150 @@ class Team_List extends Base {
 
     protected function register_content_controls() {
 
-        self::$widget->__start( 'team_list_settings_content', __( 'Team List', 'booth-elementor' ) );
+		$this->start_controls_section(
+			'team_list_settings_content',
+			[
+				'label' => __( 'Team List', 'booth-elementor' ),
+				'tab' => Controls_Manager::TAB_CONTENT,
+			]
+		);
 
-        self::$widget->select_control( 'team_member_layout', __( 'Team Member Layout', 'booth-elementor' ), 'info-bellow',
-            [
-                'info-bellow' => __( 'Alternating', 'booth-elementor' ),
-                'info-hover'  => __( 'Info on Hover', 'booth-elementor' ),
-            ]
-        );
+		$this->add_control(
+			'team_member_layout',
+			[
+				'label' => __( 'Team Member Layout', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'info-bellow',
+				'options' => [
+					'info-bellow' => __( 'Alternating', 'booth-elementor' ),
+					'info-hover'  => __( 'Info on Hover', 'booth-elementor' ),
+				],
+			]
+		);
 
-        self::$widget->select_control( 'team_member_popup', __( 'Team Member Popup', 'booth-elementor' ), 'no', booth_select_get_yes_no_select_array( false, false ),
-            [
-                'description' => __( 'Enable this option to show additional info about team member in modal popup', 'booth-elementor' ),
-            ]
-        );
+		$this->add_control(
+			'team_member_popup',
+			[
+				'label' => __( 'Team Member Popup', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'description' => __( 'Enable this option to show additional info about team member in modal popup', 'booth-elementor' ),
+				'default' => 'no',
+				'options' => booth_select_get_yes_no_select_array( false, false ),
+			]
+		);
 
-        self::$widget->select_control( 'number_of_columns', __( 'Number of Columns', 'booth-elementor' ), 'three',
-            booth_select_get_number_of_columns_array( true ),
-            [
-                'description' => __( 'Default value is Three', 'booth-elementor' ),
+		$this->add_control(
+			'number_of_columns',
+			[
+				'label' => __( 'Number of Columns', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'description' => __( 'Default value is Three', 'booth-elementor' ),
+				'default' => 'three',
+				'options' => booth_select_get_number_of_columns_array( true ),
                 'condition'   => [
                     'team_member_layout' => 'info-hover',
                 ],
-            ]
-        );
+			]
+		);
 
-        self::$widget->select_control( 'number_of_columns_alternating', __( 'Number of Columns', 'booth-elementor' ), '',
-            booth_select_get_number_of_columns_array( true, ['five', 'six'] ),
-            [
-                'description' => __( 'Default value is Three', 'booth-elementor' ),
+		$this->add_control(
+			'number_of_columns_alternating',
+			[
+				'label' => __( 'Number of Columns', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'description' => __( 'Default value is Three', 'booth-elementor' ),
+				'default' => '',
+				'options' => booth_select_get_number_of_columns_array( true, ['five', 'six'] ),
                 'condition'   => [
                     'team_member_layout' => 'info-bellow',
                 ],
-            ]
-        );
+			]
+		);
 
-        self::$widget->select_control( 'space_between_items', __( 'Space Between Items', 'booth-elementor' ), 'normal',
-            booth_select_get_space_between_items_array()
-        );
+		$this->add_control(
+			'space_between_items',
+			[
+				'label' => __( 'Space Between Items', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'normal',
+				'options' => booth_select_get_space_between_items_array(),
+			]
+		);
 
-        self::$widget->number_control( 'number_of_items', __( 'Number of team members per page', 'booth-elementor' ), '-1', '', '-1', '1000', '1', false,
+		$this->add_control(
+			'number_of_items',
+			[
+				'label' => __( 'Number of team members per page', 'booth-elementor' ),
+				'description' => __( 'Set number of items for your team list. Enter -1 to show all.', 'booth-elementor' ),
+				'type' => Controls_Manager::NUMBER,
+				'min' => '-1',
+				'max' => '1000',
+				'step' => '1',
+				'dynamic' => [
+					'active' => false,
+				],
+			]
+		);
+
+        $this->add_control(
+            'category',
             [
-                'description' => __( 'Set number of items for your team list. Enter -1 to show all.', 'booth-elementor' ),
-            ]
-        );
-
-        self::$widget->select2_control( 'category', __( 'One-Category Team List', 'booth-elementor' ), '', self::get_taxonomies(), false,
-            [
-                'label_block' => true,
+                'label'   => __( 'One-Category Team List', 'booth-elementor' ),
+				'label_block' => true,
+                'type'    => Controls_Manager::SELECT2,
                 'description' => __( 'Select category item (leave empty for showing all categories)', 'booth-elementor' ),
+                'default' => '',
+                'options' => self::get_taxonomies(),
+				'multiple' => false,
             ]
         );
 
-        self::$widget->select2_control( 'selected_members', __( 'Show Only Members with Listed IDs', 'booth-elementor' ), '', self::get_posts(), true,
+        $this->add_control(
+            'selected_members',
             [
-                'label_block' => true,
+                'label'   => __( 'Show Only Members with Listed IDs', 'booth-elementor' ),
+				'label_block' => true,
+                'type'    => Controls_Manager::SELECT2,
                 'description' => __( 'Select post item (leave empty for all)', 'booth-elementor' ),
+                'default' => '',
+                'options' => self::get_posts(),
+				'multiple' => true,
             ]
         );
 
-        self::$widget->select_control( 'orderby', __( 'Order By', 'booth-elementor' ), 'date', booth_select_get_query_order_by_array() );
+		$this->add_control(
+			'orderby',
+			[
+				'label' => __( 'Order By', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'date',
+				'options' => booth_select_get_query_order_by_array(),
+			]
+		);
 
-        self::$widget->select_control( 'order', __( 'Order', 'booth-elementor' ), 'ASC', booth_select_get_query_order_array() );
+		$this->add_control(
+			'order',
+			[
+				'label' => __( 'Order', 'booth-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'ASC',
+				'options' => booth_select_get_query_order_array(),
+			]
+		);
 
-        self::$widget->color_control( 'team_member_name_color', __( 'Team Member Name Color', 'booth-elementor' ), '', [],
-            [
-                'condition' => [
+		$this->add_control(
+			'team_member_name_color',
+			[
+				'label' => __( 'Team Member Name Color', 'booth-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'condition' => [
                     'team_member_layout' => 'info-bellow',
                 ],
-            ]
-        );
+			]
+		);
 
-        self::$widget->__end();
+        $this->end_controls_section();
 
     }
 

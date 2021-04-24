@@ -6,20 +6,6 @@ use Elementor\Controls_Manager;
 class Testimonials extends Base {
 
     /**
-     * @var mixed
-     */
-    protected static $widget;
-
-    /**
-     * @param array $data
-     * @param $args
-     */
-    public function __construct( $data = [], $args = null ) {
-        parent::__construct( $data, $args );
-        self::$widget = new Control_Ui( $this );
-    }
-
-    /**
      * Get widget title.
      *
      */
