@@ -307,6 +307,7 @@ class Pricing_Table extends Base {
 
 		$this->end_controls_section();
 	}
+	
     protected function register_style_controls() {
 
     }

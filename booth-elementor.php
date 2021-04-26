@@ -165,7 +165,7 @@ final class Booth_Elementor {
         printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $notice );
 
     }
-	
+
 	/**
      * check theme booth active or not.
      *

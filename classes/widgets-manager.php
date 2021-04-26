@@ -29,6 +29,7 @@ class Widgets_Manager {
 			'button',
 			'quote',
 			'info-table',
+			'call-to-action',
         ];
 
 		return apply_filters( 'booth_elementor__widget_map', $map );
