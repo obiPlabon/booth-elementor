@@ -30,6 +30,7 @@ class Widgets_Manager {
 			'quote',
 			'info-table',
 			'call-to-action',
+			'creative-image',
         ];
 
 		return apply_filters( 'booth_elementor__widget_map', $map );
