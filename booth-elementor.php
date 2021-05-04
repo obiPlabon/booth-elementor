@@ -12,7 +12,12 @@ namespace Booth_Elementor;
 
 defined( 'ABSPATH' ) || die();
 
-define( 'BOOTH_ELEMENTOR_VERSION', '0.0.1' );
+if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+	define( 'BOOTH_ELEMENTOR_VERSION', time() );
+} else {
+	define( 'BOOTH_ELEMENTOR_VERSION', '0.0.1' );
+}
+
 define( 'BOOTH_ELEMENTOR_MINIMUM_ELEMENTOR_VERSION', '3.0.0' );
 define( 'BOOTH_ELEMENTOR_MINIMUM_PHP_VERSION', '5.4' );
 define( 'BOOTH_ELEMENTOR_DIR_PATH', plugin_dir_path( __FILE__ ) );

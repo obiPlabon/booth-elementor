@@ -1,25 +1,15 @@
 <?php
-
+/**
+ * Countdown widget class.
+ */
 namespace Booth_Elementor\Widget;
+
+defined( 'ABSPATH' ) || die();
 
 use Elementor\Controls_Manager;
 
 class Countdown extends Base {
 
-	/**
-	 * @param array $data
-	 * @param $args
-	 */
-	public function __construct( $data = array(), $args = null ) {
-		parent::__construct( $data, $args );
-
-		## add_action( 'elementor/frontend/before_enqueue_scripts', [ $this, 'scripts_enqueue' ] );
-		## add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'scripts_enqueue' ] );
-	}
-
-	/**
-	 * Get widget title.
-	 */
 	public function get_title() {
 		return __( 'Countdown', 'booth-elementor' );
 	}
@@ -29,14 +19,8 @@ class Countdown extends Base {
 	}
 
 	public function scripts_register() {
-
 		wp_register_script( 'booth-jquery-plugin', BOOTH_ELEMENTOR_ASSETS . '/vendor/js/jquery.plugin.js', array( 'jquery', 'booth-select-modules' ), BOOTH_ELEMENTOR_VERSION, true );
 		wp_register_script( 'booth-countdown', BOOTH_ELEMENTOR_ASSETS . '/vendor/js/jquery.countdown.min.js', array( 'jquery', 'booth-select-modules' ), BOOTH_ELEMENTOR_VERSION, true );
-	}
-
-	public function scripts_enqueue() {
-		wp_enqueue_script( 'booth-jquery-plugin', BOOTH_ELEMENTOR_ASSETS . '/vendor/js/jquery.plugin.js', array( 'jquery', 'booth-select-modules' ), BOOTH_ELEMENTOR_VERSION, true );
-		wp_enqueue_script( 'booth-countdown', BOOTH_ELEMENTOR_ASSETS . '/vendor/js/jquery.countdown.min.js', array( 'jquery', 'booth-select-modules' ), BOOTH_ELEMENTOR_VERSION, true );
 	}
 
 	public function get_script_depends() {
@@ -48,7 +32,7 @@ class Countdown extends Base {
 		);
 	}
 
-	public function get_year() {
+	public static function get_years() {
 		return array(
 			'2018' => '2018',
 			'2019' => '2019',
@@ -58,7 +42,7 @@ class Countdown extends Base {
 		);
 	}
 
-	public function get_month() {
+	public static function get_months() {
 		return array(
 			'1'  => esc_html__( 'January', 'booth-elementor' ),
 			'2'  => esc_html__( 'February', 'booth-elementor' ),
@@ -75,136 +59,19 @@ class Countdown extends Base {
 		);
 	}
 
-	public function get_day() {
-		return array(
-			'1'  => '1',
-			'2'  => '2',
-			'3'  => '3',
-			'4'  => '4',
-			'5'  => '5',
-			'6'  => '6',
-			'7'  => '7',
-			'8'  => '8',
-			'9'  => '9',
-			'10' => '10',
-			'11' => '11',
-			'12' => '12',
-			'13' => '13',
-			'14' => '14',
-			'15' => '15',
-			'16' => '16',
-			'17' => '17',
-			'18' => '18',
-			'19' => '19',
-			'20' => '20',
-			'21' => '21',
-			'22' => '22',
-			'23' => '23',
-			'24' => '24',
-			'25' => '25',
-			'26' => '26',
-			'27' => '27',
-			'28' => '28',
-			'29' => '29',
-			'30' => '30',
-			'31' => '31',
-		);
+	public static function get_days() {
+		$dates = range( 1, 31 );
+		return array_combine( $dates, $dates );
 	}
 
-	public function get_hour() {
-		return array(
-			'0'  => '0',
-			'1'  => '1',
-			'2'  => '2',
-			'3'  => '3',
-			'4'  => '4',
-			'5'  => '5',
-			'6'  => '6',
-			'7'  => '7',
-			'8'  => '8',
-			'9'  => '9',
-			'10' => '10',
-			'11' => '11',
-			'12' => '12',
-			'13' => '13',
-			'14' => '14',
-			'15' => '15',
-			'16' => '16',
-			'17' => '17',
-			'18' => '18',
-			'19' => '19',
-			'20' => '20',
-			'21' => '21',
-			'22' => '22',
-			'23' => '23',
-			'24' => '24',
-		);
+	public static function get_hours() {
+		$hours = range( 0, 24 );
+		return array_combine( $hours, $hours );
 	}
 
-	public function get_minute() {
-		return array(
-			'0'  => '0',
-			'1'  => '1',
-			'2'  => '2',
-			'3'  => '3',
-			'4'  => '4',
-			'5'  => '5',
-			'6'  => '6',
-			'7'  => '7',
-			'8'  => '8',
-			'9'  => '9',
-			'10' => '10',
-			'11' => '11',
-			'12' => '12',
-			'13' => '13',
-			'14' => '14',
-			'15' => '15',
-			'16' => '16',
-			'17' => '17',
-			'18' => '18',
-			'19' => '19',
-			'20' => '20',
-			'21' => '21',
-			'22' => '22',
-			'23' => '23',
-			'24' => '24',
-			'25' => '25',
-			'26' => '26',
-			'27' => '27',
-			'28' => '28',
-			'29' => '29',
-			'30' => '30',
-			'31' => '31',
-			'32' => '32',
-			'33' => '33',
-			'34' => '34',
-			'35' => '35',
-			'36' => '36',
-			'37' => '37',
-			'38' => '38',
-			'39' => '39',
-			'40' => '40',
-			'41' => '41',
-			'42' => '42',
-			'43' => '43',
-			'44' => '44',
-			'45' => '45',
-			'46' => '46',
-			'47' => '47',
-			'48' => '48',
-			'49' => '49',
-			'50' => '50',
-			'51' => '51',
-			'52' => '52',
-			'53' => '53',
-			'54' => '54',
-			'55' => '55',
-			'56' => '56',
-			'57' => '57',
-			'58' => '58',
-			'59' => '59',
-			'60' => '60',
-		);
+	public static function get_minutes() {
+		$minutes = range( 0, 60 );
+		return array_combine( $minutes, $minutes );
 	}
 
 	protected function register_content_controls() {
@@ -235,7 +102,7 @@ class Countdown extends Base {
 				'label'   => __( 'Year', 'booth-elementor' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
-				'options' => $this->get_year(),
+				'options' => self::get_years(),
 			)
 		);
 
@@ -245,7 +112,7 @@ class Countdown extends Base {
 				'label'   => __( 'Month', 'booth-elementor' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
-				'options' => $this->get_month(),
+				'options' => self::get_months(),
 			)
 		);
 
@@ -255,7 +122,7 @@ class Countdown extends Base {
 				'label'   => __( 'Day', 'booth-elementor' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
-				'options' => $this->get_day(),
+				'options' => self::get_days(),
 			)
 		);
 
@@ -265,7 +132,7 @@ class Countdown extends Base {
 				'label'   => __( 'Hour', 'booth-elementor' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
-				'options' => $this->get_hour(),
+				'options' => self::get_hours(),
 			)
 		);
 
@@ -275,7 +142,7 @@ class Countdown extends Base {
 				'label'   => __( 'Minute', 'booth-elementor' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '',
-				'options' => $this->get_minute(),
+				'options' => self::get_minutes(),
 			)
 		);
 
