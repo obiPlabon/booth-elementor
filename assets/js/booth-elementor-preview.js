@@ -10,5 +10,11 @@
 		elementorFrontend.hooks.addAction('frontend/element_ready/booth-countdown.default', function() {
 			qodef.modules.countdown.qodefInitCountdown();
 		});
+
+		elementorFrontend.hooks.addAction('frontend/element_ready/booth-testimonials.default', function() {
+			qodef.modules.testimonialsCarousel.qodefInitTestimonials();
+
+			console.log('wow')
+		});
 	});
 }(jQuery));
