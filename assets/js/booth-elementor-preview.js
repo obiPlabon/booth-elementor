@@ -12,9 +12,8 @@
 		});
 
 		elementorFrontend.hooks.addAction('frontend/element_ready/booth-testimonials.default', function() {
-			qodef.modules.testimonialsCarousel.qodefInitTestimonials();
-
-			console.log('wow')
+			qodef.modules.common.qodefOwlSlider();
+			qodef.modules.common.qodefOnWindowLoad();
 		});
 	});
 }(jQuery));
