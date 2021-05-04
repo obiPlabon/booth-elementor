@@ -7,7 +7,7 @@ Author: booth
 Version: 0.0.1
 Author URI: booth-elementor
 Text Domain: booth-elementor
- */
+*/
 namespace Booth_Elementor;
 
 defined( 'ABSPATH' ) || die();
@@ -24,37 +24,30 @@ define( 'BOOTH_ELEMENTOR_ASSETS', trailingslashit( BOOTH_ELEMENTOR_DIR_URL . 'as
  *
  * The main class that initiates and runs the plugin.
  *
- *
  */
 final class Booth_Elementor {
 
 	/**
 	 * Instance
-	 *
 	 */
 	private static $_instance = null;
 
 	/**
 	 * Instance of this class
-	 *
 	 */
 	public static function instance() {
-
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
 
 		return self::$_instance;
-
 	}
 
 	/**
 	 * Constructor
-	 *
 	 */
-	public function __construct() {
-		add_action( 'plugins_loaded', [$this, 'init'] );
-
+	private function __construct() {
+		add_action( 'plugins_loaded', [ $this, 'init' ] );
 	}
 
 	/**
@@ -62,31 +55,26 @@ final class Booth_Elementor {
 	 *
 	 */
 	public function init() {
-
 		// Check if Elementor installed and activated
-		if ( !did_action( 'elementor/loaded' ) ) {
-			add_action( 'admin_notices', [$this, 'elementor_missing_notice'] );
-
+		if ( ! did_action( 'elementor/loaded' ) ) {
+			add_action( 'admin_notices', [ $this, 'elementor_missing_notice' ] );
 			return;
 		}
 
 		// Check for required Elementor version
-		if ( !version_compare( ELEMENTOR_VERSION, BOOTH_ELEMENTOR_MINIMUM_ELEMENTOR_VERSION, '>=' ) ) {
-			add_action( 'admin_notices', [$this, 'minimum_elementor_version_notice'] );
-
+		if ( ! version_compare( ELEMENTOR_VERSION, BOOTH_ELEMENTOR_MINIMUM_ELEMENTOR_VERSION, '>=' ) ) {
+			add_action( 'admin_notices', [ $this, 'elementor_minimum_version_notice' ] );
 			return;
 		}
 
 		// Check for required PHP version
 		if ( version_compare( PHP_VERSION, BOOTH_ELEMENTOR_MINIMUM_PHP_VERSION, '<' ) ) {
-			add_action( 'admin_notices', [$this, 'ha_required_php_version_missing_notice'] );
-
+			add_action( 'admin_notices', [ $this, 'php_version_missing_notice' ] );
 			return;
 		}
 
-		if ( !$this->is_booth_active() ) {
-			add_action( 'admin_notices', [$this, 'theme_missing_notice'] );
-
+		if ( ! $this->is_booth_active() ) {
+			add_action( 'admin_notices', [ $this, 'booth_theme_missing' ] );
 			return;
 		}
 
@@ -102,13 +90,17 @@ final class Booth_Elementor {
 	 * @access public
 	 */
 	public function lets_go() {
-
-		add_action( 'init', [$this, 'i18n'] );
-
-		// Register category
-		add_action( 'elementor/elements/categories_registered', [$this, 'register_category'] );
+		$this->register_hooks();
 
 		$this->include_files();
+	}
+
+	public function register_hooks() {
+		// Init i18n
+		add_action( 'init', [ $this, 'i18n' ] );
+
+		// Register category
+		add_action( 'elementor/elements/categories_registered', [ $this, 'register_category' ] );
 
 		// Remove tgmpa admin notice
 		add_action( 'admin_init', function() {
@@ -120,17 +112,13 @@ final class Booth_Elementor {
 
 	/**
 	 * Load Textdomain
-	 *
 	 */
 	public function i18n() {
-
 		load_plugin_textdomain( 'booth-elementor' );
-
 	}
 
 	/**
 	 * Include files
-	 *
 	 */
 	public function include_files() {
 		include_once BOOTH_ELEMENTOR_DIR_PATH . 'inc/functions.php';
@@ -141,7 +129,6 @@ final class Booth_Elementor {
 
 	/**
 	 * Add category
-	 *
 	 */
 	public function register_category() {
 		booth_elementor()->elements_manager->add_category(
@@ -155,10 +142,8 @@ final class Booth_Elementor {
 
 	/**
 	 * Admin notice for Elementor installed or activated.
-	 *
 	 */
 	public function elementor_missing_notice() {
-
 		if ( isset( $_GET['activate'] ) ) {
 			unset( $_GET['activate'] );
 		}
@@ -170,12 +155,10 @@ final class Booth_Elementor {
 		);
 
 		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $notice );
-
 	}
 
 	/**
 	 * check theme booth active or not.
-	 *
 	 */
 	public function is_booth_active() {
 		$theme = wp_get_theme(); // gets the current theme
@@ -188,10 +171,8 @@ final class Booth_Elementor {
 
 	/**
 	 * Admin notice for minimum required Elementor version.
-	 *
 	 */
-	public function minimum_elementor_version_notice() {
-
+	public function elementor_minimum_version_notice() {
 		if ( isset( $_GET['activate'] ) ) {
 			unset( $_GET['activate'] );
 		}
@@ -204,12 +185,10 @@ final class Booth_Elementor {
 		);
 
 		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $notice );
-
 	}
 
 	/**
 	 * Admin notice for minimum required php version.
-	 *
 	 */
 	function php_version_missing_notice() {
 		$notice = sprintf(
@@ -227,8 +206,7 @@ final class Booth_Elementor {
 	 * Admin notice for install booth theme.
 	 *
 	 */
-	function theme_missing_notice() {
-
+	function booth_theme_missing() {
 		$notice = sprintf(
 			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'booth-elementor' ),
 			'<strong>' . esc_html__( 'Booth Elementor', 'booth-elementor' ) . '</strong>',
@@ -237,7 +215,6 @@ final class Booth_Elementor {
 
 		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $notice );
 	}
-
 }
 
 Booth_Elementor::instance();
