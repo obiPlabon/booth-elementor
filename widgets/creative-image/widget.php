@@ -82,6 +82,9 @@ class Creative_Image extends Base {
                 'label_block' => true,
                 'type'        => Controls_Manager::TEXT,
                 'default'     => 'Malene Kruse',
+				'condition' => [
+					'style!' => 'style-3',
+				]
             ]
         );
 
@@ -92,6 +95,9 @@ class Creative_Image extends Base {
                 'label_block' => true,
                 'type'        => Controls_Manager::TEXT,
                 'default'     => 'Photographer',
+				'condition' => [
+					'style!' => 'style-3',
+				]
             ]
         );
 
@@ -149,6 +155,49 @@ class Creative_Image extends Base {
 			]
 		);
 
+        $this->add_control(
+            'badge_text',
+            [
+                'label'       => __( 'Badge Text', 'booth-elementor' ),
+                'label_block' => true,
+                'type'        => Controls_Manager::TEXT,
+                'default'     => '2003',
+				'condition' => [
+					'style' => 'style-3',
+				]
+            ]
+        );
+
+		$this->add_control(
+			'badge_position',
+			[
+				'label' => __( 'Badge Position', 'plugin-domain' ),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => __( 'Left', 'plugin-domain' ),
+						'icon' => 'eicon-h-align-left',
+					],
+					'right' => [
+						'title' => __( 'Right', 'plugin-domain' ),
+						'icon' => 'eicon-h-align-right',
+					],
+				],
+				'default' => 'left',
+				'toggle' => false,
+                // 'selectors_dictionary' => [
+                //     'top' => 'order: -1;',
+                //     'bottom' => '',
+                // ],
+				// 'selectors' => [
+				// 	'{{WRAPPER}} .creative-image-info' => '{{VALUE}}',
+				// ],
+				'condition' => [
+					'style' => 'style-3',
+				]
+			]
+		);
+
         $this->end_controls_section();
 
     }
@@ -192,6 +241,13 @@ class Creative_Image extends Base {
 						endif;
 					?>
 
+					<?php
+						if ( 'style-3'== $settings['style'] ):
+							$this->render_banner($settings);
+						endif;
+					?>
+
+					<?php if ( 'style-3' != $settings['style'] ): ?>
 						<div class="creative-image-pattern-hover">
 							<span></span>
 							<span></span>
@@ -200,6 +256,7 @@ class Creative_Image extends Base {
 							<span></span>
 							<span></span>
 						</div>
+					<?php endif; ?>
 
 					<?php if ( ! empty( $settings['link']['url'] ) ): ?>
 						</a>
@@ -239,6 +296,21 @@ class Creative_Image extends Base {
 			<h6 class="creative-image-position"><?php echo esc_html( $settings['position'] ); ?></h6>
 			<?php endif; ?>
 
+		</div>
+		<?php
+	}
+
+	public function render_banner($settings) {
+		if( empty($settings['badge_text']) ){
+			return;
+		}
+		?>
+		<div class="creative-image-badge creative-image-badge-<?php echo esc_attr( $settings['badge_position'] ); ?>">
+			<div class="creative-image-badge-inner">
+				<div class="creative-image-badge-text">
+					<h5 class="creative-image-badge-title"><?php echo esc_html( $settings['badge_text'] ); ?></h5>
+				</div>
+			</div>
 		</div>
 		<?php
 	}
