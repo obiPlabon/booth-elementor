@@ -19,7 +19,7 @@ class Widgets_Manager {
 	public static function __widgets_map() {
 
 		$map = [
-			'test-addon',
+			//'test-addon',
 			'faq',
 			'countdown',
 			'team-list',
