@@ -1,3 +1,4 @@
+/* Quote Start */
 .qodef-dark-skin blockquote:before,
 blockquote:before {
 	content: url(../img/quote_dark.svg);
@@ -6,7 +7,15 @@ blockquote:before {
 blockquote:before {
 	content: url(../img/quote_light.svg);
 }
+/* Quote End */
 
+
+/* Event List Start */
+.qodef-event-list-holder.qodef-el-pattern-background .qodef-el-item:nth-child(odd) {
+    background-image: url(../img/default_pattern.png);
+    background-repeat: repeat;
+}
+/* Event List End */
 
 /* Creative Image Start */
 .creative-image-wrap {
