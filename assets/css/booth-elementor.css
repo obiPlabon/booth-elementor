@@ -10,12 +10,16 @@ blockquote:before {
 
 /* Creative Image Start */
 .creative-image-wrap {
+	--animation-color: #4ec4ff;
+	--badge-color: #4ec4ff;
+}
+.creative-image-wrap {
 	position: relative;
 	display: inline-block;
 	width: 100%;
 	vertical-align: top;
 	box-sizing: border-box;
-	margin: 0 0 65px;
+	margin: 0;
 }
 
 .creative-image-wrap .creative-image-wrap-inner {
@@ -34,6 +38,10 @@ blockquote:before {
 	position: relative;
 	overflow: hidden;
 	display: block;
+
+}
+
+.creative-image-wrap.creative-image-style-1 .creative-image {
 	margin: 0 0 27px;
 }
 
@@ -94,7 +102,7 @@ blockquote:before {
 	display: block;
 	width: 100%;
 	height: 65px;
-	background: #4ec4ff;
+	background: var(--animation-color, #4ec4ff);
 	-webkit-transform-origin: top;
 	-ms-transform-origin: top;
 	transform-origin: top;
@@ -152,7 +160,7 @@ blockquote:before {
 }
 
 .creative-image-wrap .creative-image-info {
-	margin-bottom: 20px;
+	margin-bottom: 0;
 }
 
 .creative-image-wrap.creative-image-style-2 .creative-image-info {
@@ -178,7 +186,7 @@ blockquote:before {
 }
 
 .creative-image-wrap .creative-image-position {
-	margin: 6px 0 16px;
+	margin: 0 0 16px;
 	font-size: 16px;
 	color: #4ec4ff;
 	font-family: Oswald, sans-serif;
@@ -207,22 +215,22 @@ blockquote:before {
 		left bottom,
 		from(transparent),
 		color-stop(50%, transparent),
-		color-stop(51%, #4ec4ff),
-		to(#4ec4ff)
+		color-stop(51%, var(--badge-color, #4ec4ff)),
+		to(var(--badge-color, #4ec4ff))
 	);
 	background: -o-linear-gradient(
 		top right,
 		transparent 0,
 		transparent 50%,
-		#4ec4ff 51%,
-		#4ec4ff 100%
+		var(--badge-color, #4ec4ff) 51%,
+		var(--badge-color, #4ec4ff) 100%
 	);
 	background: linear-gradient(
 		to bottom left,
 		transparent 0,
 		transparent 50%,
-		#4ec4ff 51%,
-		#4ec4ff 100%
+		var(--badge-color, #4ec4ff) 51%,
+		var(--badge-color, #4ec4ff) 100%
 	);
 }
 
@@ -235,22 +243,22 @@ blockquote:before {
 		right bottom,
 		from(transparent),
 		color-stop(50%, transparent),
-		color-stop(51%, #4ec4ff),
-		to(#4ec4ff)
+		color-stop(51%, var(--badge-color, #4ec4ff)),
+		to(var(--badge-color, #4ec4ff))
 	);
 	background: -o-linear-gradient(
 		top left,
 		transparent 0,
 		transparent 50%,
-		#4ec4ff 51%,
-		#4ec4ff 100%
+		var(--badge-color, #4ec4ff) 51%,
+		var(--badge-color, #4ec4ff) 100%
 	);
 	background: linear-gradient(
 		to bottom right,
 		transparent 0,
 		transparent 50%,
-		#4ec4ff 51%,
-		#4ec4ff 100%
+		var(--badge-color, #4ec4ff) 51%,
+		var(--badge-color, #4ec4ff) 100%
 	);
 }
 
