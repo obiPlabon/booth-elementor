@@ -389,7 +389,7 @@ class Creative_Image extends Base {
 				'label' => __( 'Animation Color', 'booth-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .creative-image-wrap' => '--animation-color: {{VALUE}}',
+					'{{WRAPPER}} .creative-image-wrap' => '--booth-animation-color: {{VALUE}}',
 				],
 				'condition' => [
 					'style!' => 'style-3',
@@ -496,7 +496,7 @@ class Creative_Image extends Base {
 				'label' => __( 'Background', 'booth-elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .creative-image-wrap' => '--badge-color: {{VALUE}}',
+					'{{WRAPPER}} .creative-image-wrap' => '--booth-badge-color: {{VALUE}}',
 				],
 				'condition' => [
 					'style' => 'style-3',
