@@ -193,7 +193,7 @@ class Event_List extends Base {
 			[
 				'label' => __( 'Event List Skin', 'booth-elementor' ),
 				'type' => Controls_Manager::SELECT,
-				'default' => 'dark',
+				'default' => 'light',
 				'options' =>  [
 					'light' => __( 'Light', 'booth-elementor' ),
 					'dark' => __( 'Dark', 'booth-elementor' ),
