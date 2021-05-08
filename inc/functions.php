@@ -38,33 +38,9 @@ function is_booth_active() {
 	return ( 'Booth' == $theme->name || 'Booth' == $theme->parent_theme );
 }
 
-
-// if ( ! function_exists( 'booth_select_contact_form_map' ) ) {
-// 	/**
-// 	 * Map Contact Form 7 shortcode
-// 	 * Hooks on vc_after_init action
-// 	 */
-// 	function booth_select_contact_form_map() {
-// 		vc_add_param('contact-form-7', array(
-// 			'type' => 'dropdown',
-// 			'heading' => esc_html__('Style', 'booth'),
-// 			'param_name' => 'html_class',
-// 			'value' => array(
-// 				esc_html__('Default', 'booth') => 'default',
-// 				esc_html__('Custom Style 1', 'booth') => 'cf7_custom_style_1',
-// 				esc_html__('Custom Style 2', 'booth') => 'cf7_custom_style_2',
-// 				esc_html__('Custom Style 3', 'booth') => 'cf7_custom_style_3'
-// 			),
-// 			'description' => esc_html__('You can style each form element individually in Select Options > Contact Form 7', 'booth')
-// 		));
-// 	}
-
-// 	add_action('vc_after_init', 'booth_select_contact_form_map');
-// }
-
 // replace cf7 submit button with our button
-remove_action('wpcf7_init', 'wpcf7_add_form_tag_submit');
-add_action('wpcf7_init', 'booth_elementor_select_cf7_button');
+remove_action( 'wpcf7_init', 'wpcf7_add_form_tag_submit' );
+add_action( 'wpcf7_init', 'booth_elementor_select_cf7_button' );
 
 if ( ! function_exists( 'booth_elementor_select_cf7_button' ) ) {
 	function booth_elementor_select_cf7_button() {

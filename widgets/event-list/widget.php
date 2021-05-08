@@ -1,6 +1,8 @@
 <?php
 namespace Booth_Elementor\Widget;
 
+defined( 'ABSPATH' ) || die();
+
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Repeater;
@@ -8,79 +10,61 @@ use Elementor\Utils;
 use Elementor\Group_Control_Typography;
 use Elementor\Core\Schemes\Typography;
 
-use \Elementor\Group_Control_Background;
-use \Elementor\Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Box_Shadow;
 
 class Event_List extends Base {
 
-    /**
-     * @var mixed
-     */
-    protected static $widget;
+	public function get_title() {
+		return __( 'Event List', 'booth-elementor' );
+	}
 
-    /**
-     * @param array $data
-     * @param $args
-     */
-    public function __construct( $data = [], $args = null ) {
-        parent::__construct( $data, $args );
-        self::$widget = new Control_Ui( $this );
-    }
+	public function get_keywords() {
+		return ['booth', 'event-list', 'event', 'list'];
+	}
 
-    /**
-     * Get widget title.
-     *
-     */
-    public function get_title() {
-        return __( 'Event List', 'booth-elementor' );
-    }
+	/**
+	 * Get a list of All Post Types
+	 *
+	 * @return array
+	 */
+	public static function get_posts() {
+		$args = [
+			'post_status'    => 'publish',
+			'post_type'      => 'events',
+			'posts_per_page' => '-1',
+		];
 
-    public function get_keywords() {
-        return ['booth', 'event-list', 'event', 'list'];
-    }
+		$posts = get_posts( $args );
+		$options = [];
+		foreach ( $posts as $key => $item ) {
+			$options[$item->ID] = $item->post_title;
+		}
 
-    /**
-     * Get a list of All Post Types
-     *
-     * @return array
-     */
-    public static function get_posts() {
-        $args = [
-            'post_status'    => 'publish',
-            'post_type'      => 'events',
-            'posts_per_page' => '-1',
-        ];
+		return $options;
+	}
 
-        $posts = get_posts( $args );
-        $options = [];
-        foreach ( $posts as $key => $item ) {
-            $options[$item->ID] = $item->post_title;
-        }
+	/**
+	 * Get a list of Taxonomy
+	 *
+	 * @return array
+	 */
+	public static function get_taxonomies() {
+		$args = [
+			'taxonomy'   => 'events_category',
+			'hide_empty' => true,
+		];
+		$terms = get_terms( $args );
+		$options = [];
+		foreach ( $terms as $key => $item ) {
+			$options[$item->slug] = $item->name;
+		}
 
-        return $options;
-    }
+		return $options;
+	}
 
-    /**
-     * Get a list of Taxonomy
-     *
-     * @return array
-     */
-    public static function get_taxonomies() {
-        $args = [
-            'taxonomy'   => 'events_category',
-            'hide_empty' => true,
-        ];
-        $terms = get_terms( $args );
-        $options = [];
-        foreach ( $terms as $key => $item ) {
-            $options[$item->slug] = $item->name;
-        }
-
-        return $options;
-    }
-
-    protected function register_content_controls() {
+	protected function register_content_controls() {
 
 		$this->start_controls_section(
 			'events_settings_content',
@@ -221,45 +205,45 @@ class Event_List extends Base {
 			]
 		);
 
-        $this->end_controls_section();
+		$this->end_controls_section();
 
-    }
+	}
 
-    protected function register_style_controls() {
+	protected function register_style_controls() {
 
-    }
+	}
 
-    /**
-     * @return null
-     */
-    protected function render() {
-        // return;
-        $settings = $this->get_settings_for_display();
+	/**
+	 * @return null
+	 */
+	protected function render() {
+		// return;
+		$settings = $this->get_settings_for_display();
 
 		$args = [
-            'post_status'    => 'publish',
-            'post_type'      => 'events',
-            'posts_per_page' => $settings['number_of_events'],
-            'orderby'        => $settings['orderby'],
-            'order'          => $settings['order'],
-        ];
+			'post_status'    => 'publish',
+			'post_type'      => 'events',
+			'posts_per_page' => $settings['number_of_events'],
+			'orderby'        => $settings['orderby'],
+			'order'          => $settings['order'],
+		];
 
-        if ( !empty( $settings['category'] ) ) {
-            $args['events_category'] = $settings['category'];
-        }
+		if ( !empty( $settings['category'] ) ) {
+			$args['events_category'] = $settings['category'];
+		}
 
 
-        if ( !empty( $settings['selected_events'] ) ) {
-            $args['post__in'] = $settings['selected_events'];
-        }
+		if ( !empty( $settings['selected_events'] ) ) {
+			$args['post__in'] = $settings['selected_events'];
+		}
 
-        $query_results = new \WP_Query( $args );
+		$query_results = new \WP_Query( $args );
 
-        $holder_classes = $this->getHolderClasses( $settings );
+		$holder_classes = $this->getHolderClasses( $settings );
 		$list_title = ! empty( $settings['list_title'] ) ? $settings['list_title'] : '';
 		$title_tag = ! empty( $settings['title_tag'] ) ? $settings['title_tag'] : 'h5';
 
-        ?>
+		?>
 			<div class="qodef-event-list-holder qodef-grid-list qodef-el-table <?php echo esc_attr( $holder_classes ); ?>">
 				<div class="qodef-el-wrapper qodef-outer-space">
 					<?php if(!empty($list_title)) : ?>
@@ -295,9 +279,9 @@ class Event_List extends Base {
 	}
 
 
-    /**
-     * @param $params
-     */
+	/**
+	 * @param $params
+	 */
 	private function getHolderClasses( $params ) {
 		$holderClasses = array();
 
@@ -318,13 +302,13 @@ class Event_List extends Base {
 		return implode( ' ', $holderClasses );
 	}
 
-    /**
-     * @param $params
-     * @param $args
-     * @return mixed
-     */
-    private function info_markup( $settings, $title_tag ) {
-        $current_id = get_the_ID();
+	/**
+	 * @param $params
+	 * @param $args
+	 * @return mixed
+	 */
+	private function info_markup( $settings, $title_tag ) {
+		$current_id = get_the_ID();
 		$date_meta  = get_post_meta( $current_id, 'qodef_event_date_meta', true );
 		$time_meta  = get_post_meta( $current_id, 'qodef_event_time_meta', true );
 		$stage_meta = get_post_meta( $current_id, 'qodef_event_stage_meta', true );
@@ -365,6 +349,6 @@ class Event_List extends Base {
 		<?php
 			}
 		}
-    }
+	}
 
 }
