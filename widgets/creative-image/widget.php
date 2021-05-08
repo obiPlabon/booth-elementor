@@ -1,6 +1,10 @@
 <?php
-
+/**
+ * Creative image widget class.
+ */
 namespace Booth_Elementor\Widget;
+
+defined( 'ABSPATH' ) || die();
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Image_Size;

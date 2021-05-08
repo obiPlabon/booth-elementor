@@ -1,5 +1,10 @@
 <?php
+/**
+ * Button widget class.
+ */
 namespace Booth_Elementor\Widget;
+
+defined( 'ABSPATH' ) || die();
 
 use Elementor\Controls_Manager;
 
