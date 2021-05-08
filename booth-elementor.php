@@ -52,7 +52,7 @@ final class Booth_Elementor {
 	 * Constructor
 	 */
 	private function __construct() {
-		add_action( 'plugins_loaded', [ $this, 'init' ] );
+		add_action( 'plugins_loaded', [ $this, 'init' ], '20' );
 	}
 
 	/**
@@ -80,6 +80,16 @@ final class Booth_Elementor {
 
 		if ( ! $this->is_booth_active() ) {
 			add_action( 'admin_notices', [ $this, 'booth_theme_missing' ] );
+			return;
+		}
+
+		if ( ! function_exists( 'booth_core_text_domain' ) ) {
+			add_action( 'admin_notices', [ $this, 'booth_core_plugin_missing' ] );
+			return;
+		}
+
+		if ( !class_exists('SP_Bookings') ) {
+			add_action( 'admin_notices', [ $this, 'timetable_plugin_missing' ] );
 			return;
 		}
 
@@ -216,6 +226,34 @@ final class Booth_Elementor {
 			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'booth-elementor' ),
 			'<strong>' . esc_html__( 'Booth Elementor', 'booth-elementor' ) . '</strong>',
 			'<strong>' . esc_html__( 'Booth Theme', 'booth-elementor' ) . '</strong>'
+		);
+
+		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $notice );
+	}
+
+	/**
+	 * Admin notice for install booth core plugin.
+	 *
+	 */
+	function booth_core_plugin_missing() {
+		$notice = sprintf(
+			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'booth-elementor' ),
+			'<strong>' . esc_html__( 'Booth Elementor', 'booth-elementor' ) . '</strong>',
+			'<strong>' . esc_html__( 'Booth Core', 'booth-elementor' ) . '</strong>'
+		);
+
+		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $notice );
+	}
+
+	/**
+	 * Admin notice for install timetable plugin.
+	 *
+	 */
+	function timetable_plugin_missing() {
+		$notice = sprintf(
+			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'booth-elementor' ),
+			'<strong>' . esc_html__( 'Booth Elementor', 'booth-elementor' ) . '</strong>',
+			'<strong>' . esc_html__( 'Timetable Responsive Schedule For WordPress', 'booth-elementor' ) . '</strong>'
 		);
 
 		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $notice );

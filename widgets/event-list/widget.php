@@ -136,6 +136,7 @@ class Event_List extends Base {
 			'category',
 			[
 				'label' => __( 'One Category List', 'booth-elementor' ),
+				'label_block' => true,
 				'type' => Controls_Manager::SELECT2,
 				'description' => __( 'Enter one category slug (leave empty for showing all categories)', 'booth-elementor' ),
 				'default' => '',
@@ -148,6 +149,7 @@ class Event_List extends Base {
 			'selected_events',
 			[
 				'label' => __( 'Show Only Events with Listed IDs', 'booth-elementor' ),
+				'label_block' => true,
 				'type' => Controls_Manager::SELECT2,
 				'description' => __( 'Enter events ids (leave empty for all)', 'booth-elementor' ),
 				'default' => '',
@@ -191,7 +193,7 @@ class Event_List extends Base {
 			[
 				'label' => __( 'Event List Skin', 'booth-elementor' ),
 				'type' => Controls_Manager::SELECT,
-				'default' => 'dark',
+				'default' => 'light',
 				'options' =>  [
 					'light' => __( 'Light', 'booth-elementor' ),
 					'dark' => __( 'Dark', 'booth-elementor' ),
@@ -254,6 +256,7 @@ class Event_List extends Base {
         $query_results = new \WP_Query( $args );
 
         $holder_classes = $this->getHolderClasses( $settings );
+		$list_title = ! empty( $settings['list_title'] ) ? $settings['list_title'] : '';
 		$title_tag = ! empty( $settings['title_tag'] ) ? $settings['title_tag'] : 'h5';
 
         ?>

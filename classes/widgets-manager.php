@@ -10,32 +10,6 @@ class Widgets_Manager {
 		add_action( 'elementor/widgets/widgets_registered', [ __CLASS__, 'register' ] );
 	}
 
-
-	/**
-	 * Get the widgets map
-	 *
-	 * @return array
-	 */
-	public static function __widgets_map() {
-
-		$map = [
-			'test-addon',
-			'faq',
-			'countdown',
-			'team-list',
-			'testimonials',
-			'event-list',
-			'pricing-table',
-			'button',
-			'quote',
-			'info-table',
-			'call-to-action',
-			'creative-image',
-        ];
-
-		return apply_filters( 'booth_elementor__widget_map', $map );
-    }
-
 	/**
 	 * Include widgets files and register them
 	 *
@@ -47,11 +21,13 @@ class Widgets_Manager {
         include_once( BOOTH_ELEMENTOR_DIR_PATH . 'base/widget-base.php' );
 
 		// foreach ( self::__widgets_map() as $widget_key => $data ) {}
-		foreach ( self::__widgets_map() as $widget_key ) {
-
-				self::register_widget( $widget_key );
-
-		}
+		$widget_map = [];
+		foreach (glob( BOOTH_ELEMENTOR_DIR_PATH . 'widgets/*', GLOB_ONLYDIR ) as $folderpath) {
+            $foldername =  str_replace(BOOTH_ELEMENTOR_DIR_PATH . 'widgets/', '', $folderpath);
+			self::register_widget( $foldername );
+			$widget_map[] = $folderpath;
+        }
+		apply_filters( 'booth_elementor__widget_map', $widget_map );
 	}
 
 	protected static function register_widget( $widget_key ) {

@@ -20,12 +20,6 @@ class Creative_Image extends Base {
     }
 
     protected function register_content_controls() {
-
-        $this->__register_cta_content_controls();
-
-    }
-
-    protected function __register_cta_content_controls() {
         $this->start_controls_section(
             'booth_creative_image_content',
             [
@@ -202,7 +196,317 @@ class Creative_Image extends Base {
 
     }
 
-    protected function register_style_controls() {}
+    protected function register_style_controls() {
+        $this->start_controls_section(
+            'booth_creative_image_style',
+            [
+                'label' => __( 'Style', 'booth-elementor' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+		$this->add_control(
+			'image_btm_margin',
+			[
+				'label' => __( 'Image Space', 'booth-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap .creative-image' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'style' => 'style-1',
+				],
+				'separator' => 'after',
+			]
+		);
+
+		$this->add_control(
+			'name_heading',
+			[
+				'label' => __( 'Name', 'booth-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'condition' => [
+					'style!' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'name_btm_margin',
+			[
+				'label' => __( 'Name Space', 'booth-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap .creative-image-name' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'style!' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'name_font_size',
+			[
+				'label' => __( 'Font Size', 'booth-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 500,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap .creative-image-name' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'style!' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'name_color',
+			[
+				'label' => __( 'Name Color', 'booth-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap .creative-image-name' => 'color: {{VALUE}}',
+				],
+				'condition' => [
+					'style!' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'position_heading',
+			[
+				'label' => __( 'Position', 'booth-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'style!' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'position_btm_margin',
+			[
+				'label' => __( 'Position Space', 'booth-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap .creative-image-position' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'style!' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'position_font_size',
+			[
+				'label' => __( 'Font Size', 'booth-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 500,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap .creative-image-position' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'style!' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'position_color',
+			[
+				'label' => __( 'Position Color', 'booth-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap .creative-image-position' => 'color: {{VALUE}}',
+				],
+				'condition' => [
+					'style!' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'animation_heading',
+			[
+				'label' => __( 'Animation', 'booth-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'style!' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'animation_color',
+			[
+				'label' => __( 'Animation Color', 'booth-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap' => '--booth-animation-color: {{VALUE}}',
+				],
+				'condition' => [
+					'style!' => 'style-3',
+				]
+			]
+		);
+
+		/* Style 3 */
+		$this->add_control(
+			'badge_heading',
+			[
+				'label' => __( 'Badge', 'booth-elementor' ),
+				'type' => Controls_Manager::HEADING,
+				// 'separator' => 'before',
+				'condition' => [
+					'style' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'badge_width',
+			[
+				'label' => __( 'Width', 'booth-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 500,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap .creative-image-badge' => 'width: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'style' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'badge_height',
+			[
+				'label' => __( 'Height', 'booth-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 500,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap .creative-image-badge' => 'height: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'style' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'badge_font_size',
+			[
+				'label' => __( 'Font Size', 'booth-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 500,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap .creative-image-badge-title' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'style' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'badge_color',
+			[
+				'label' => __( 'Color', 'booth-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap .creative-image-badge-title' => 'color: {{VALUE}}',
+				],
+				'condition' => [
+					'style' => 'style-3',
+				]
+			]
+		);
+
+		$this->add_control(
+			'badge_area_color',
+			[
+				'label' => __( 'Background', 'booth-elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .creative-image-wrap' => '--booth-badge-color: {{VALUE}}',
+				],
+				'condition' => [
+					'style' => 'style-3',
+				]
+			]
+		);
+
+		$this->end_controls_section();
+
+	}
 
     protected function render() {
         // return;
