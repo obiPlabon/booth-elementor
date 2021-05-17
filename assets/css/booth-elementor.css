@@ -17,6 +17,13 @@ blockquote:before {
 }
 /* Event List End */
 
+
+/* Team List Start */
+.qodef-team-list-holder.qodef-extra-large-space .qodef-outer-space .qodef-item-space {
+    padding: 0 17.5px;
+}
+/* Team List End */
+
 /* Creative Image Start */
 .creative-image-wrap {
 	--booth-animation-color: #4ec4ff;
