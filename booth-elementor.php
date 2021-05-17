@@ -7,6 +7,7 @@ Author: booth
 Version: 0.0.1
 Author URI: booth-elementor
 Text Domain: booth-elementor
+Contributors: obiplabon, iqbalrony ( https://obiplabon.im/ http://www.iqbalrony.com/ )
 */
 namespace Booth_Elementor;
 

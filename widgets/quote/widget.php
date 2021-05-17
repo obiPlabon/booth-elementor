@@ -71,7 +71,7 @@ class Quote extends Base {
 			return;
 		}
 		?>
-		<blockquote><?php echo $this->parse_text_editor( $settings['text'] ); ?></blockquote>
+		<blockquote><?php echo '<p>' . $this->parse_text_editor( $settings['text'] ) .'</p>' ; ?></blockquote>
 		<?php
 	}
 
