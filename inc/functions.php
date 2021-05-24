@@ -57,3 +57,30 @@ if ( ! function_exists( 'booth_elementor_select_cf7_button_handler' ) ) {
 		return $html;
 	}
 }
+
+if ( ! function_exists( 'booth_elementor_button_widget_custom_styles' ) ) {
+
+	function booth_elementor_button_widget_custom_styles() {
+		$first_main_color = booth_select_options()->getOptionValue( 'first_color' );
+		if ( ! empty( $first_main_color ) ) {
+			echo booth_select_dynamic_css(
+				'.elementor-element .elementor-button',
+				array(
+					'background-color' => $first_main_color
+				)
+			);
+		}
+
+		$second_main_color = booth_select_options()->getOptionValue( 'second_color' );
+		if ( ! empty( $second_main_color ) ) {
+			echo booth_select_dynamic_css(
+				'.elementor-element .elementor-button:hover, .elementor-element .elementor-button:focus, .elementor-element .elementor-button:active',
+				array(
+					'background-color' => $second_main_color
+				)
+			);
+		}
+	}
+
+	add_action( 'booth_select_action_style_dynamic', 'booth_elementor_button_widget_custom_styles' );
+}
