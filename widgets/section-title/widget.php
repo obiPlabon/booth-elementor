@@ -409,12 +409,7 @@ class Section_Title extends Base {
 					<div class="qodef-st-title-holder">
 						<<?php echo esc_attr( $title_tag ); ?> class="qodef-st-title" <?php echo booth_select_get_inline_style( $title_styles ); ?>>
 						<?php if ( $title_type !== 'highlighted') { ?>
-							<span class="qodef-st-text-with-square">
-								<span class="qodef-st-square" <?php booth_select_inline_style($square_style); ?>></span>
-								<span class="qodef-st-first-letter"><?php echo substr($title, 0,1);?></span>
-							</span>
-							<span class="qodef-st-title-text"><?php echo wp_kses( substr($title, 1), array( 'br' => true, 'span' => array( 'class' => true ) ) ); ?>
-							</span>
+							<span class="qodef-st-text-with-square"><span class="qodef-st-square" <?php booth_select_inline_style($square_style); ?>></span><span class="qodef-st-first-letter"><?php echo substr($title, 0,1);?></span></span><span class="qodef-st-title-text"><?php echo wp_kses( substr($title, 1), array( 'br' => true, 'span' => array( 'class' => true ) ) ); ?></span>
 						<?php } else {
 							echo wp_kses( $title, array( 'br' => true, 'span' => array( 'class' => true ) ) );
 						}
