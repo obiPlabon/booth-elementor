@@ -278,7 +278,6 @@ class TimeTable extends Base {
 			'hide_all_events_view',
 			[
 				'label'       => __( 'Hide \'All Events\' view', 'booth-elementor' ),
-				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					'0' => __( 'No', 'timetable' ),
@@ -291,11 +290,143 @@ class TimeTable extends Base {
 			'hide_all_events_view',
 			[
 				'label'       => __( 'Hide \'All Events\' view', 'booth-elementor' ),
-				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					'0' => __( 'No', 'timetable' ),
 					'1' => __( 'Yes', 'timetable' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'hide_hours_column',
+			[
+				'label'       => __( 'Hide first (hours) column', 'booth-elementor' ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => [
+					'0' => __( 'No', 'timetable' ),
+					'1' => __( 'Yes', 'timetable' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'show_end_hour',
+			[
+				'label'       => __( 'Show end hour in first (hours) column', 'booth-elementor' ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => [
+					'0' => __( 'No', 'timetable' ),
+					'1' => __( 'Yes', 'timetable' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'event_layout',
+			[
+				'label'       => __( 'Event block layout', 'booth-elementor' ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => [
+					'1' => __( 'Type 1', 'timetable' ),
+					'2' => __( 'Type 2', 'timetable' ),
+					'3' => __( 'Type 3', 'timetable' ),
+					'4' => __( 'Type 4', 'timetable' ),
+					'5' => __( 'Type 5', 'timetable' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'hide_empty',
+			[
+				'label'       => __( 'Hide empty rows', 'booth-elementor' ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => [
+					'0' => __( 'No', 'timetable' ),
+					'1' => __( 'Yes', 'timetable' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'disable_event_url',
+			[
+				'label'       => __( 'Disable event url', 'booth-elementor' ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => [
+					'0' => __( 'No', 'timetable' ),
+					'1' => __( 'Yes', 'timetable' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'text_align',
+			[
+				'label'       => __( 'Disable event url', 'booth-elementor' ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => [
+					'center' => __( 'Center', 'timetable' ),
+					'left'   => __( 'Left', 'timetable'),
+					'right'  => __( 'Right', 'timetable'),
+				],
+			]
+		);
+
+		$this->add_control(
+			'html_id',
+			[
+				'label'       => __( 'Id', 'booth-elementor' ),
+				'label_block' => false,
+				'type'        => Controls_Manager::TEXT,
+			]
+		);
+
+		$this->add_control(
+			'row_height',
+			[
+				'label'       => __( 'Row height (in px)', 'booth-elementor' ),
+				'label_block' => false,
+				'type'        => Controls_Manager::TEXT,
+			]
+		);
+
+		$this->add_control(
+			'desktop_list_view',
+			[
+				'label'       => __( 'Display list view on desktop', 'booth-elementor' ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => [
+					'0' => __( 'No', 'timetable' ),
+					'1' => __( 'Yes', 'timetable' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'responsive',
+			[
+				'label'       => __( 'Responsive', 'booth-elementor' ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => [
+					'0' => __( 'No', 'timetable' ),
+					'1' => __( 'Yes', 'timetable' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'event_description_responsive',
+			[
+				'label'       => __( 'Event description in responsive mode', 'booth-elementor' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::SELECT,
+				'options'     => [
+					'none'                            => __( 'None', 'timetable' ),
+					'description-1'                   => __( 'Only Description 1', 'timetable' ),
+					'description-2'                   => __( 'Only Description 2', 'timetable' ),
+					'description-1-and-description-2' => __( 'Description 1 and Description 2', 'timetable' ),
 				],
 			]
 		);
