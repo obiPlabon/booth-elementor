@@ -27,7 +27,7 @@ class TimeTable extends Base {
 
 	public static function get_shortcode_ids() {
 		$lists = get_option( 'timetable_shortcodes_list' );
-		$arr = [ '-1' => __( 'Choose...', 'timetable' ) ];
+		$arr   = [ '-1' => __( 'Choose...', 'timetable' ) ];
 
 		if ( ! empty( $lists ) ) {
 			foreach ( $lists as $key => $val ) {
@@ -40,7 +40,7 @@ class TimeTable extends Base {
 
 	public static function get_events() {
 		$settings = timetable_events_settings();
-		$events = get_posts( [
+		$events   = get_posts( [
 			'nopaging'       => true,
 			'order'          => 'ASC',
 			'orderby'        => 'title',
@@ -83,9 +83,9 @@ class TimeTable extends Base {
 		$settings = timetable_events_settings();
 
 		$query = "SELECT distinct(category) AS category FROM " . $wpdb->prefix . "event_hours AS t1
-		LEFT JOIN {$wpdb->posts} AS t2 ON t1.event_id=t2.ID
-		WHERE t2.post_type='" . $settings['slug'] . "'
-		AND t2.post_status='publish'
+		LEFT  JOIN {$wpdb->posts} AS t2 ON t1.event_id = t2.ID
+		WHERE t2.post_type                             = '" . $settings['slug'] . "'
+		AND   t2.post_status                           = 'publish'
 		AND category<>''
 		ORDER BY category ASC";
 
@@ -95,7 +95,7 @@ class TimeTable extends Base {
 
 		if ( ! empty( $categories ) ) {
 			foreach ( $categories as $category ) {
-				$arr[ $category->category ] =  $category->category;
+				$arr[ $category->category ] = $category->category;
 			}
 		}
 
@@ -277,33 +277,21 @@ class TimeTable extends Base {
 		$this->add_control(
 			'hide_all_events_view',
 			[
-				'label'       => __( 'Hide \'All Events\' view', 'booth-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => [
+				'label'   => __( 'Hide \'All Events\' view', 'booth-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [
 					'0' => __( 'No', 'timetable' ),
 					'1' => __( 'Yes', 'timetable' ),
 				],
 			]
 		);
 
-		// $this->add_control(
-		// 	'hide_all_events_view',
-		// 	[
-		// 		'label'       => __( 'Hide \'All Events\' view', 'booth-elementor' ),
-		// 		'type'        => Controls_Manager::SELECT,
-		// 		'options'     => [
-		// 			'0' => __( 'No', 'timetable' ),
-		// 			'1' => __( 'Yes', 'timetable' ),
-		// 		],
-		// 	]
-		// );
-
 		$this->add_control(
 			'hide_hours_column',
 			[
-				'label'       => __( 'Hide first (hours) column', 'booth-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => [
+				'label'   => __( 'Hide first (hours) column', 'booth-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [
 					'0' => __( 'No', 'timetable' ),
 					'1' => __( 'Yes', 'timetable' ),
 				],
@@ -313,9 +301,9 @@ class TimeTable extends Base {
 		$this->add_control(
 			'show_end_hour',
 			[
-				'label'       => __( 'Show end hour in first (hours) column', 'booth-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => [
+				'label'   => __( 'Show end hour in first (hours) column', 'booth-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [
 					'0' => __( 'No', 'timetable' ),
 					'1' => __( 'Yes', 'timetable' ),
 				],
@@ -325,9 +313,9 @@ class TimeTable extends Base {
 		$this->add_control(
 			'event_layout',
 			[
-				'label'       => __( 'Event block layout', 'booth-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => [
+				'label'   => __( 'Event block layout', 'booth-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [
 					'1' => __( 'Type 1', 'timetable' ),
 					'2' => __( 'Type 2', 'timetable' ),
 					'3' => __( 'Type 3', 'timetable' ),
@@ -340,9 +328,9 @@ class TimeTable extends Base {
 		$this->add_control(
 			'hide_empty',
 			[
-				'label'       => __( 'Hide empty rows', 'booth-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => [
+				'label'   => __( 'Hide empty rows', 'booth-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [
 					'0' => __( 'No', 'timetable' ),
 					'1' => __( 'Yes', 'timetable' ),
 				],
@@ -352,9 +340,9 @@ class TimeTable extends Base {
 		$this->add_control(
 			'disable_event_url',
 			[
-				'label'       => __( 'Disable event url', 'booth-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => [
+				'label'   => __( 'Disable event url', 'booth-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [
 					'0' => __( 'No', 'timetable' ),
 					'1' => __( 'Yes', 'timetable' ),
 				],
@@ -364,9 +352,9 @@ class TimeTable extends Base {
 		$this->add_control(
 			'text_align',
 			[
-				'label'       => __( 'Disable event url', 'booth-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => [
+				'label'   => __( 'Disable event url', 'booth-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [
 					'center' => __( 'Center', 'timetable' ),
 					'left'   => __( 'Left', 'timetable'),
 					'right'  => __( 'Right', 'timetable'),
@@ -395,9 +383,9 @@ class TimeTable extends Base {
 		$this->add_control(
 			'desktop_list_view',
 			[
-				'label'       => __( 'Display list view on desktop', 'booth-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => [
+				'label'   => __( 'Display list view on desktop', 'booth-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [
 					'0' => __( 'No', 'timetable' ),
 					'1' => __( 'Yes', 'timetable' ),
 				],
@@ -407,9 +395,9 @@ class TimeTable extends Base {
 		$this->add_control(
 			'responsive',
 			[
-				'label'       => __( 'Responsive', 'booth-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => [
+				'label'   => __( 'Responsive', 'booth-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [
 					'0' => __( 'No', 'timetable' ),
 					'1' => __( 'Yes', 'timetable' ),
 				],
@@ -430,11 +418,6 @@ class TimeTable extends Base {
 				],
 			]
 		);
-
-
-		/**
-		 * TODO: Have to add more controls here
-		 */
 
 		$this->add_control(
 			'collapse_event_hours_responsive',
@@ -481,7 +464,7 @@ class TimeTable extends Base {
 				'label'       => __( 'Generate PDF label', 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::TEXT,
-				'default'       => __( 'Generate PDF', 'booth-elementor' ),
+				'default'     => __( 'Generate PDF', 'booth-elementor' ),
 			]
 		);
 
@@ -492,7 +475,7 @@ class TimeTable extends Base {
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
-					"lato" => __("Lato", "booth-elementor"),
+					"lato"       => __("Lato", "booth-elementor"),
 					"dejavusans" => __("DejaVu Sans", "booth-elementor"),
 				],
 			]
@@ -501,206 +484,206 @@ class TimeTable extends Base {
 		$this->add_control(
 			'box_bg_color',
 			[
-				'label'       => __( 'Timetable box background color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#00a27c',
+				'label'   => __( 'Timetable box background color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#00a27c',
 			]
 		);
 
 		$this->add_control(
 			'box_hover_bg_color',
 			[
-				'label'       => __( 'Timetable box hover background color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#1f736a',
+				'label'   => __( 'Timetable box hover background color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#1f736a',
 			]
 		);
 
 		$this->add_control(
 			'box_txt_color',
 			[
-				'label'     => __( 'Timetable box text color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#ffffff',
+				'label'   => __( 'Timetable box text color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#ffffff',
 			]
 		);
 
 		$this->add_control(
 			'box_hover_txt_color',
 			[
-				'label'     => __( 'Timetable box hover text color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#ffffff',
+				'label'   => __( 'Timetable box hover text color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#ffffff',
 			]
 		);
 
 		$this->add_control(
 			'box_hours_txt_color',
 			[
-				'label'     => __( 'Timetable box hours text color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#ffffff',
+				'label'   => __( 'Timetable box hours text color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#ffffff',
 			]
 		);
 
 		$this->add_control(
 			'box_hours_hover_txt_color',
 			[
-				'label'     => __( 'Timetable box hours hover text color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#ffffff',
+				'label'   => __( 'Timetable box hours hover text color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#ffffff',
 			]
 		);
 
 		$this->add_control(
 			'filter_color',
 			[
-				'label'     => __( 'Filter control background color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#00a27c',
+				'label'   => __( 'Filter control background color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#00a27c',
 			]
 		);
 
 		$this->add_control(
 			'row1_color',
 			[
-				'label'     => __( 'Row 1 style background color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#f0f0f0',
+				'label'   => __( 'Row 1 style background color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#f0f0f0',
 			]
 		);
 
 		$this->add_control(
 			'row2_color',
 			[
-				'label'     => __( 'Row 2 style background color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '',
+				'label'   => __( 'Row 2 style background color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '',
 			]
 		);
 
 		$this->add_control(
 			'generate_pdf_text_color',
 			[
-				'label'     => __( 'Generate PDF button text color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#ffffff',
+				'label'   => __( 'Generate PDF button text color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#ffffff',
 			]
 		);
 
 		$this->add_control(
 			'generate_pdf_bg_color',
 			[
-				'label'     => __( 'Generate PDF button background color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#00a27c',
+				'label'   => __( 'Generate PDF button background color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#00a27c',
 			]
 		);
 
 		$this->add_control(
 			'generate_pdf_hover_text_color',
 			[
-				'label'     => __( 'Generate PDF button hover text color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#ffffff',
+				'label'   => __( 'Generate PDF button hover text color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#ffffff',
 			]
 		);
 
 		$this->add_control(
 			'generate_pdf_hover_bg_color',
 			[
-				'label'     => __( 'Generate PDF button hover background color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#1f736a',
+				'label'   => __( 'Generate PDF button hover background color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#1f736a',
 			]
 		);
 
 		$this->add_control(
 			'booking_text_color',
 			[
-				'label'     => __( 'Booking button text color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#ffffff',
+				'label'   => __( 'Booking button text color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#ffffff',
 			]
 		);
 
 		$this->add_control(
 			'booking_bg_color',
 			[
-				'label'     => __( 'Booking button background color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#05bb90',
+				'label'   => __( 'Booking button background color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#05bb90',
 			]
 		);
 
 		$this->add_control(
 			'booking_hover_text_color',
 			[
-				'label'     => __( 'Booking button hover text color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#ffffff',
+				'label'   => __( 'Booking button hover text color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#ffffff',
 			]
 		);
 
 		$this->add_control(
 			'booking_hover_bg_color',
 			[
-				'label'     => __( 'Booking button hover background color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#07b38a',
+				'label'   => __( 'Booking button hover background color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#07b38a',
 			]
 		);
 
 		$this->add_control(
 			'booked_text_color',
 			[
-				'label'     => __( 'Booked button text color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#aaaaaa',
+				'label'   => __( 'Booked button text color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#aaaaaa',
 			]
 		);
 
 		$this->add_control(
 			'booked_bg_color',
 			[
-				'label'     => __( 'Booked button background color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#eeeeee',
+				'label'   => __( 'Booked button background color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#eeeeee',
 			]
 		);
 
 		$this->add_control(
 			'unavailable_text_color',
 			[
-				'label'     => __( 'Unavailable button text color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#aaaaaa',
+				'label'   => __( 'Unavailable button text color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#aaaaaa',
 			]
 		);
 
 		$this->add_control(
 			'unavailable_bg_color',
 			[
-				'label'     => __( 'Unavailable button background color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#eeeeee',
+				'label'   => __( 'Unavailable button background color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#eeeeee',
 			]
 		);
 
 		$this->add_control(
 			'available_slots_color',
 			[
-				'label'     => __( 'Available slots color', 'booth-elementor' ),
-				'type'        => Controls_Manager::COLOR,
-				'default'        => '#ffd544',
+				'label'   => __( 'Available slots color', 'booth-elementor' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#ffd544',
 			]
 		);
 
 		$this->add_control(
 			'font_custom',
 			[
-				'label'     => __( 'Table header font', 'booth-elementor' ),
-				'type'        => Controls_Manager::TEXT,
+				'label' => __( 'Table header font', 'booth-elementor' ),
+				'type'  => Controls_Manager::TEXT,
 			]
 		);
 
@@ -743,8 +726,8 @@ class TimeTable extends Base {
 		$this->add_control(
 			'font_size',
 			[
-				'label'     => __( 'Font size (in px)', 'booth-elementor' ),
-				'type'        => Controls_Manager::TEXT,
+				'label' => __( 'Font size (in px)', 'booth-elementor' ),
+				'type'  => Controls_Manager::TEXT,
 			]
 		);
 
@@ -755,8 +738,8 @@ class TimeTable extends Base {
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
-					"no" => __("No", "booth-elementor"),
-					"always" => __("Always", "booth-elementor"),
+					"no"       => __("No", "booth-elementor"),
+					"always"   => __("Always", "booth-elementor"),
 					"on_hover" => __("On hover", "booth-elementor"),
 				],
 			]
@@ -769,7 +752,7 @@ class TimeTable extends Base {
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
-					"no" => __("No", "booth-elementor"),
+					"no"     => __("No", "booth-elementor"),
 					"always" => __("Always", "booth-elementor"),
 				],
 			]
@@ -781,8 +764,8 @@ class TimeTable extends Base {
 				'label'       => __( 'Available slots singular label', 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::TEXT,
-				"default" => "{number_available}/{number_total} slot available",
-				'description'     => __( "Specify text label for 'slot available' information (singular). Available placeholders: {number_available}, {number_taken}, {number_total}.", 'booth-elementor' ),
+				"default"     => "{number_available}/{number_total} slot available",
+				'description' => __( "Specify text label for 'slot available' information (singular). Available placeholders: {number_available}, {number_taken}, {number_total}.", 'booth-elementor' ),
 			]
 		);
 
@@ -792,8 +775,8 @@ class TimeTable extends Base {
 				'label'       => __( 'Available slots plural label', 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::TEXT,
-				"default" => "{number_available}/{number_total} slots available",
-				'description'     => __( "Specify text label for 'slots available' information (plural). Available placeholders: {number_available}, {number_taken}, {number_total}.", 'booth-elementor' ),
+				"default"     => "{number_available}/{number_total} slots available",
+				'description' => __( "Specify text label for 'slots available' information (plural). Available placeholders: {number_available}, {number_taken}, {number_total}.", 'booth-elementor' ),
 			]
 		);
 
@@ -801,11 +784,11 @@ class TimeTable extends Base {
 			'default_booking_view',
 			[
 				'label'       => __( 'Default booking view', 'booth-elementor' ),
-				'description'       => __( 'Specify which booking view should be visible by default.', 'booth-elementor' ),
+				'description' => __( 'Specify which booking view should be visible by default.', 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
-					"user" => __("User", "booth-elementor"),
+					"user"  => __("User", "booth-elementor"),
 					"guest" => __("Guest", "booth-elementor"),
 				],
 			]
@@ -815,12 +798,12 @@ class TimeTable extends Base {
 			'allow_user_booking',
 			[
 				'label'       => __( 'Allow user booking', 'booth-elementor' ),
-				'description'       => __( "Set to 'Yes' if you want to allow logged in users to make a booking.", 'booth-elementor' ),
+				'description' => __( "Set to 'Yes' if you want to allow logged in users to make a booking.", 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					"yes" => __("Yes", "booth-elementor"),
-					"no" => __("No", "booth-elementor"),
+					"no"  => __("No", "booth-elementor"),
 				],
 				'condition'     => [
 					"default_booking_view" => 'guest'
@@ -832,12 +815,12 @@ class TimeTable extends Base {
 			'allow_guest_booking',
 			[
 				'label'       => __( 'Allow guest booking', 'booth-elementor' ),
-				'description'       => __( "Set to 'Yes' if you want to allow guests to make a booking.", 'booth-elementor' ),
+				'description' => __( "Set to 'Yes' if you want to allow guests to make a booking.", 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					"yes" => __("Yes", "booth-elementor"),
-					"no" => __("No", "booth-elementor"),
+					"no"  => __("No", "booth-elementor"),
 				],
 			]
 		);
@@ -846,12 +829,12 @@ class TimeTable extends Base {
 			'show_guest_name_field',
 			[
 				'label'       => __( 'Show guest name field', 'booth-elementor' ),
-				'description'       => __( "Set to 'Yes' if you want to show 'Name' field in guest booking form.", 'booth-elementor' ),
+				'description' => __( "Set to 'Yes' if you want to show 'Name' field in guest booking form.", 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					"yes" => __("Yes", "booth-elementor"),
-					"no" => __("No", "booth-elementor"),
+					"no"  => __("No", "booth-elementor"),
 				],
 				'condition'     => [
 					"allow_guest_booking" => 'yes'
@@ -863,12 +846,12 @@ class TimeTable extends Base {
 			'guest_name_field_required',
 			[
 				'label'       => __( 'Guest name field required', 'booth-elementor' ),
-				'description'       => __( "Set to 'Yes' if the 'Name' field should be required.", 'booth-elementor' ),
+				'description' => __( "Set to 'Yes' if the 'Name' field should be required.", 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					"yes" => __("Yes", "booth-elementor"),
-					"no" => __("No", "booth-elementor"),
+					"no"  => __("No", "booth-elementor"),
 				],
 				'condition'     => [
 					"allow_guest_booking" => 'yes'
@@ -880,12 +863,12 @@ class TimeTable extends Base {
 			'show_guest_phone_field',
 			[
 				'label'       => __( 'Show guest phone field', 'booth-elementor' ),
-				'description'       => __( "Set to 'Yes' if you want to show 'Phone' field in guest booking form.", 'booth-elementor' ),
+				'description' => __( "Set to 'Yes' if you want to show 'Phone' field in guest booking form.", 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					"yes" => __("Yes", "booth-elementor"),
-					"no" => __("No", "booth-elementor"),
+					"no"  => __("No", "booth-elementor"),
 				],
 				'condition'     => [
 					"allow_guest_booking" => 'yes'
@@ -897,12 +880,12 @@ class TimeTable extends Base {
 			'guest_phone_field_required',
 			[
 				'label'       => __( 'Guest phone field required', 'booth-elementor' ),
-				'description'       => __( "Set to 'Yes' if the 'Phone' field should be required.", 'booth-elementor' ),
+				'description' => __( "Set to 'Yes' if the 'Phone' field should be required.", 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					"yes" => __("Yes", "booth-elementor"),
-					"no" => __("No", "booth-elementor"),
+					"no"  => __("No", "booth-elementor"),
 				],
 				'condition'     => [
 					"allow_guest_booking" => 'yes'
@@ -914,12 +897,12 @@ class TimeTable extends Base {
 			'show_guest_message_field',
 			[
 				'label'       => __( 'Show guest message field', 'booth-elementor' ),
-				'description'       => __( "Set to 'Yes' if you want to show 'Message' field in guest booking form.", 'booth-elementor' ),
+				'description' => __( "Set to 'Yes' if you want to show 'Message' field in guest booking form.", 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					"yes" => __("Yes", "booth-elementor"),
-					"no" => __("No", "booth-elementor"),
+					"no"  => __("No", "booth-elementor"),
 				],
 				'condition'     => [
 					"allow_guest_booking" => 'yes'
@@ -931,12 +914,12 @@ class TimeTable extends Base {
 			'guest_message_field_required',
 			[
 				'label'       => __( 'Guest message field required', 'booth-elementor' ),
-				'description'       => __( "Set to 'Yes' if the 'Message' field should be required.", 'booth-elementor' ),
+				'description' => __( "Set to 'Yes' if the 'Message' field should be required.", 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					"yes" => __("Yes", "booth-elementor"),
-					"no" => __("No", "booth-elementor"),
+					"no"  => __("No", "booth-elementor"),
 				],
 				'condition'     => [
 					"allow_guest_booking" => 'yes'
@@ -950,7 +933,7 @@ class TimeTable extends Base {
 				'label'       => __( 'Booking label', 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::TEXT,
-				'default'       => 'Book now',
+				'default'     => 'Book now',
 			]
 		);
 
@@ -960,7 +943,7 @@ class TimeTable extends Base {
 				'label'       => __( 'Booked label', 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::TEXT,
-				'default'       => 'Booked',
+				'default'     => 'Booked',
 			]
 		);
 
@@ -970,7 +953,7 @@ class TimeTable extends Base {
 				'label'       => __( 'Unavailable label', 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::TEXT,
-				'default'       => 'Unavailable',
+				'default'     => 'Unavailable',
 			]
 		);
 
@@ -980,7 +963,7 @@ class TimeTable extends Base {
 				'label'       => __( 'Popup booking label', 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::TEXT,
-				'default'       => 'Book now',
+				'default'     => 'Book now',
 			]
 		);
 
@@ -990,7 +973,7 @@ class TimeTable extends Base {
 				'label'       => __( 'Popup login label', 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::TEXT,
-				'default'       => 'Log in',
+				'default'     => 'Log in',
 			]
 		);
 
@@ -1000,7 +983,7 @@ class TimeTable extends Base {
 				'label'       => __( 'Popup cancel label', 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::TEXT,
-				'default'       => 'Cancel',
+				'default'     => 'Cancel',
 			]
 		);
 
@@ -1010,7 +993,7 @@ class TimeTable extends Base {
 				'label'       => __( 'Popup continue label', 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::TEXT,
-				'default'       => 'Continue',
+				'default'     => 'Continue',
 			]
 		);
 
@@ -1018,12 +1001,12 @@ class TimeTable extends Base {
 			'terms_checkbox',
 			[
 				'label'       => __( 'Terms and conditions checkbox', 'booth-elementor' ),
-				'description'       => __( "Set to 'Yes' if you want to display 'Terms and conditions' checkbox.", 'booth-elementor' ),
+				'description' => __( "Set to 'Yes' if you want to display 'Terms and conditions' checkbox.", 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT,
 				'options'     => [
 					"yes" => __("Yes", "booth-elementor"),
-					"no" => __("No", "booth-elementor"),
+					"no"  => __("No", "booth-elementor"),
 				],
 			]
 		);
@@ -1032,42 +1015,32 @@ class TimeTable extends Base {
 			'terms_message',
 			[
 				'label'       => __( 'Terms and conditions message', 'booth-elementor' ),
-				'description'       => __( "Specify text for 'Terms and conditions' checkbox.", 'booth-elementor' ),
+				'description' => __( "Specify text for 'Terms and conditions' checkbox.", 'booth-elementor' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::TEXT,
-				'default'       => 'Please accept terms and conditions',
+				'default'     => 'Please accept terms and conditions',
 			]
 		);
 
 		$this->add_control(
 			'booking_popup_message',
 			[
-				'label' => __( 'Booking pop-up message', 'booth-elementor' ),
+				'label'       => __( 'Booking pop-up message', 'booth-elementor' ),
 				'label_block' => true,
-				'type' => Controls_Manager::TEXTAREA,
-				'default'       => defined( 'BOOKING_POPUP_MESSAGE' ) ? BOOKING_POPUP_MESSAGE : '',
-				'description'       => __( "Specify text that will appear in pop-up window. Available placeholders: {event_title} {column_title} {event_start} {event_end} {event_description_1} {event_description_2} {user_name} {user_email} {tt_btn_book} {tt_btn_cancel} {tt_btn_continue}", 'booth-elementor' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'default'     => defined( 'BOOKING_POPUP_MESSAGE' ) ? BOOKING_POPUP_MESSAGE : '',
+				'description' => __( "Specify text that will appear in pop-up window. Available placeholders: {event_title} {column_title} {event_start} {event_end} {event_description_1} {event_description_2} {user_name} {user_email} {tt_btn_book} {tt_btn_cancel} {tt_btn_continue}", 'booth-elementor' ),
 			]
 		);
 
 		$this->add_control(
 			'booking_popup_thank_you_message',
 			[
-				'label' => __( 'Booking pop-up thank you message', 'booth-elementor' ),
+				'label'       => __( 'Booking pop-up thank you message', 'booth-elementor' ),
 				'label_block' => true,
-				'type' => Controls_Manager::TEXTAREA,
-				'default'       => defined( 'BOOKING_POPUP_THANK_YOU_MESSAGE' ) ? BOOKING_POPUP_THANK_YOU_MESSAGE : '',
+				'type'        => Controls_Manager::TEXTAREA,
+				'default'     => defined( 'BOOKING_POPUP_THANK_YOU_MESSAGE' ) ? BOOKING_POPUP_THANK_YOU_MESSAGE : '',
 				'description' => __( "Specify text that will appear in pop-up window. Available placeholders: {event_title} {column_title} {event_start} {event_end} {event_description_1} {event_description_2} {user_name} {user_email} {tt_btn_continue}", 'booth-elementor' ),
-			]
-		);
-
-		$this->add_control(
-			'custom_css',
-			[
-				'label' => __( 'Custom CSS', 'booth-elementor' ),
-				'label_block' => true,
-				'type' => Controls_Manager::TEXTAREA,
-				'default' => '',
 			]
 		);
 
