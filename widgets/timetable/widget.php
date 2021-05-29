@@ -67,6 +67,10 @@ class TimeTable extends Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
+		if ( empty( $settings['shortcode_id'] ) ) {
+			return;
+		}
+
 		echo tt_timetable( array( 'shortcode_id' => $settings['shortcode_id'] ), '' );
 	}
 }
